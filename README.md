@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Procedimieto para hacer un merge request
+Primero tienen que asegurarse que la rama master este actualizada, para ello tienen que hacer un git checkout master y una vez que esten dentro de la rama realizar un git pull origin master.
 
-## Getting Started
+Recordar que una vez que empiezan a realizar un nuevo trabajo tienen que crear su propia rama, para ello deben de estar colocados en la rama master y poner git branch <nombre de la rama>.
 
-First, run the development server:
+Una vez que hayan terminado su trabajo en su rama, hacen un git add . y un  git commit -m "Breve descripción de lo que hicierón".
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Una vez hecho esto, hacen un git checkout master, cuando esten posicionados en master, hacen un git merge suRama, resuelven los conflictos y se aseguran con un git status.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vuelven a confirmar que no haya cambios en la rama con git pull origin master, una vez esto, se regresan a su rama con git checkout suRama.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Finalmente, en su rama hacen un  git push origin <nombre de su rama>.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Esperan a que sean aceptados sus cambios.Procedimieto para hacer un merge request
+Primero tienen que asegurarse que la rama master este actualizada, para ello tienen que hacer un git checkout master y una vez que esten dentro de la rama realizar un git pull origin master.
 
-## Learn More
+Recordar que una vez que empiezan a realizar un nuevo trabajo tienen que crear su propia rama, para ello deben de estar colocados en la rama master y poner git branch <nombre de la rama>.
 
-To learn more about Next.js, take a look at the following resources:
+Una vez que hayan terminado su trabajo en su rama, hacen un git add . y un  git commit -m "Breve descripción de lo que hicierón".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Una vez hecho esto, hacen un git checkout master, cuando esten posicionados en master, hacen un git merge suRama, resuelven los conflictos y se aseguran con un git status.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Vuelven a confirmar que no haya cambios en la rama con git pull origin master, una vez esto, se regresan a su rama con git checkout suRama.
 
-## Deploy on Vercel
+Finalmente, en su rama hacen un  git push origin <nombre de su rama>.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Esperan a que sean aceptados sus cambios.
