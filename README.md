@@ -1,36 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Procedimieto para hacer un merge request</h1>
 
-## Getting Started
+1. Primero tienen que asegurarse que la rama master este actualizada, para ello tienen que hacer un ```git checkout master``` y una vez que esten dentro de la rama realizar un ```git pull origin master```.
 
-First, run the development server:
+2. Recordar que una vez que empiezan a realizar un nuevo trabajo tienen que crear su propia rama, para ello deben de estar colocados en la rama master y poner ```git branch <nombre de la rama>```.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3. Una vez que hayan terminado su trabajo en su rama, hacen un ``` git add . ``` y un ``` git commit -m "Breve descripción de lo que hicierón"```.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Una vez hecho esto, hacen un ``` git checkout master ```, cuando esten posicionados en master, hacen un ``` git merge suRama ```, resuelven los conflictos y se aseguran con un ``` git status ```.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. Vuelven a confirmar que no haya cambios en la rama con ``` git pull origin master ```, una vez esto, se regresan a su rama con ``` git checkout suRama ```.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+6. Finalmente, en su rama hacen un ``` git push origin <nombre de su rama>```.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+7. Esperan a que sean aceptados sus cambios.
