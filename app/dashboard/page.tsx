@@ -15,7 +15,7 @@ export default function dashboard() {
         email: "nettelgunther@outlook.es",
     }
 
-    console.log(avatar, objetivo, operador, lista, aplicacion)
+
 
     return (
       <main className="flex h-screen w-screen">
