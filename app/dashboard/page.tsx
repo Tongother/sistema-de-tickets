@@ -26,23 +26,23 @@ export default function dashboard() {
 
             <section className="">
                 <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                    <img src="/_next/static/media/objetivo.a4ae5ec3.png" alt="Personas" className="w-[2em] h-[2em]"/>
+                    <img src={`${objetivo.src}`} alt="Personas" className="w-[2em] h-[2em]"/>
                     <h1 className="ml-2">Clientes</h1>
                 </article>
                 <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg  p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                    <img src="/_next/static/media/operador.4e105f95.png" alt="Personas" className="w-[2em] h-[2em]"/>
+                    <img src={`${operador.src}`} alt="Personas" className="w-[2em] h-[2em]"/>
                     <h1 className="ml-2">Asesór tecnico</h1>
                 </article>
                 <article className=" flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg  p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                    <img src="/_next/static/media/lista-de-verificacion.a87c4fd2.png" alt="Personas" className="w-[2em] h-[2em]"/>
+                    <img src={`${lista.src}`} alt="Personas" className="w-[2em] h-[2em]"/>
                     <h1 className="ml-2">Estatus de atención</h1>
                 </article>
                 <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg  p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                    <img src="/_next/static/media/aplicacion.0a7c1520.png" alt="Personas" className="w-[2em] h-[2em]"/>
+                    <img src={`${aplicacion.src}`} alt="Personas" className="w-[2em] h-[2em]"/>
                     <h1 className="ml-2">Categoría de problematica</h1>
                 </article>
                 <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg  p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                    <img src="/_next/static/media/objetivo.a4ae5ec3.png" alt="Personas" className="w-[2em] h-[2em]"/>
+                    <img src={`${lista.src}`} alt="Personas" className="w-[2em] h-[2em]"/>
                     <h1 className="ml-2">Reportes</h1>
                 </article>
             </section>
@@ -51,7 +51,7 @@ export default function dashboard() {
         <section className="w-full flex flex-col">
             <article className="bg-slate-100 w-full h-[5em] flex justify-end">
                 <div className="w-[16em] h-full pl-[1.5em] flex items-center cursor-pointer hover:bg-slate-200">
-                    <img src="/_next/static/media/avatar.e2eb4918.png" alt="" className="w-[4em] h-[4em]" />
+                    <img src={`${avatar.src}`} alt="" className="w-[4em] h-[4em]" />
                     <div className="ml-[10px]">
                         <h1>Gunther Nettel</h1>
                         <p>Administrador</p>
