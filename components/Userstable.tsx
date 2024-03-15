@@ -1,44 +1,16 @@
-import React, { useState } from "react";
+import { HtmlContext } from "next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints";
+import React, {FC, useEffect, useState } from "react";
 
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
+interface UserTableProps{
+  employees:{ id: number; name: string; email: string; password: string; }[];
 }
 
-export default function Userstable() {
-  const [employees, setEmployees] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      password: "password123",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      password: "password456",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob.johnson@example.com",
-      password: "password789",
-    },
-    {
-      id: 4,
-      name: "Alice Williams",
-      email: "alice.williams@example.com",
-      password: "passwordabc",
-    },
-  ]);
-
+const UsersTable:FC<UserTableProps> = ({employees}) => {
+  
   return (
    <>
    
-    <table className="table-auto">
+    <table className="w-full table-auto">
       <thead>
         <tr>
           <th className="px-4 py-2">ID</th>
@@ -61,3 +33,5 @@ export default function Userstable() {
    </>
   )
 }
+
+export default UsersTable;

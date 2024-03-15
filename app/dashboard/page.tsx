@@ -1,5 +1,7 @@
 "use client"
-import Userstable from "@/components/Userstable";
+import { useEffect, useState } from "react";
+import UsersTable from "@/components/UsersTable";
+import SearchBar from "@/components/SearchBar";
 import avatar from "./../../public/avatar.png";
 import objetivo from "./../../public/objetivo.png";
 import operador from "./../../public/operador.png";
@@ -15,11 +17,85 @@ export default function dashboard() {
         email: "nettelgunther@outlook.es",
     }
 
+    const [search, setSearch] = useState('');
+    const [employees, setEmployees] = useState<{ id: number; name: string; email: string; password: string; }[]>([
+        {
+            id: 1,
+            name: "John Doe",
+            email: "john.doe@example.com",
+            password: "password123",
+          },
+          {
+            id: 2,
+            name: "Jane Smith",
+            email: "jane.smith@example.com",
+            password: "password456",
+          },
+          {
+            id: 3,
+            name: "Bob Johnson",
+            email: "bob.johnson@example.com",
+            password: "password789",
+          },
+          {
+            id: 4,
+            name: "Alice Williams",
+            email: "alice.williams@example.com",
+            password: "passwordabc",
+          },
+          {
+            id: 5,
+            name: "Eva Davis",
+            email: "eva.davis@example.com",
+            password: "passwordxyz",
+          },
+          {
+            id: 6,
+            name: "Michael Brown",
+            email: "michael.brown@example.com",
+            password: "password123",
+          },
+          {
+            id: 7,
+            name: "Olivia Wilson",
+            email: "olivia.wilson@example.com",
+            password: "password456",
+          },
+          {
+            id: 8,
+            name: "James Johnson",
+            email: "james.johnson@example.com",
+            password: "password789",
+          },
+          {
+            id: 9,
+            name: "Sophia Davis",
+            email: "sophia.davis@example.com",
+            password: "passwordabc",
+          },
+          {
+            id: 10,
+            name: "William Smith",
+            email: "william.smith@example.com",
+            password: "passwordxyz",
+          },
+          {
+            id: 11,
+            name: "Emma Wilson",
+            email: "emma.wilson@example.com",
+            password: "password123",
+          },
+    ]);
+    const [filterEmployees, setFilterEmployees] = useState<{ id: number; name: string; email: string; password: string; }[]>([]);
 
+    useEffect(() => {
+        setFilterEmployees(employees);
+        setFilterEmployees(employees.filter((employee) => employee.name.toLowerCase().includes(search.toLowerCase())));
+    }, [search]);
 
     return (
       <main className="flex h-screen w-screen">
-        <section className="w-[30%] bg-blue-950 text-white">
+        <section className="w-[30%] bg-gray-900 text-white shadow-2xl">
             <article className="w-full h-[6em] flex items-center justify-center">
                 <h1 className="text-xl">ADMIN</h1>
             </article>
@@ -49,7 +125,7 @@ export default function dashboard() {
         </section>
 
         <section className="w-full flex flex-col">
-            <article className="bg-slate-100 w-full h-[5em] flex justify-end">
+            <article className="bg-slate-50 w-full h-[5em] flex justify-end shadow-md">
                 <div className="w-[16em] h-full pl-[1.5em] flex items-center cursor-pointer hover:bg-slate-200">
                     <img src={`${avatar.src}`} alt="" className="w-[4em] h-[4em]" />
                     <div className="ml-[10px]">
@@ -59,8 +135,15 @@ export default function dashboard() {
                 </div>
             </article>
 
-            <article>
-                <Userstable/>
+            <article className="w-full h-full flex justify-center items-center">
+                <div className="w-[90%] h-[85%] flex flex-col rounded-lg shadow-2xl">
+                    <div className="mt-10">
+                        <SearchBar search={search} setSearch={setSearch}/>
+                    </div>
+                    <div className="h-full mt-10 overflow-auto">
+                        <UsersTable employees={filterEmployees}/>
+                    </div>
+                </div>
             </article>
         </section>
       </main>
