@@ -2,7 +2,6 @@
   "name": "sistema-de-tickets-windcode",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "mssql": "^10.0.2",
     "next": "14.1.3",
     "react": "^18",
     "react-dom": "^18"
