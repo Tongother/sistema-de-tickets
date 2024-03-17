@@ -6,7 +6,7 @@ interface SearchBarProps{
 }
 
 const SearchBar:FC<SearchBarProps> = ({search, setSearch}) => {
-  
+
     return (
         <div className="w-full flex justify-center">
             <input type="text" placeholder="Search" 
