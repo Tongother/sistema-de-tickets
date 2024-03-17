@@ -14,9 +14,6 @@ export default function dashboard() {
         username: "Tongo",
         email: "nettelgunther@outlook.es",
     }
-
-
-
     return (
       <main className="flex h-screen w-screen">
         <section className="w-[30%] bg-blue-950 text-white">
