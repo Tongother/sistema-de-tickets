@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Connection from "@/database/Connection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,8 @@ export default function RootLayout({
 }: Readonly<{
   children: JSX.Element | JSX.Element[];
 }>) {
+
+  Connection();
 
   return (
     <html lang="es">
