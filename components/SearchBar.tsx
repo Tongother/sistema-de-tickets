@@ -1,11 +1,34 @@
-import { FC } from 'react';
+"use client"
+import { FC, useEffect, useState } from 'react';
 
-interface SearchBarProps{
-  search:string;
-  setSearch: (search:string) => void;
-}
+const SearchBar = () => {
 
-const SearchBar:FC<SearchBarProps> = ({search, setSearch}) => {
+    const [search, setSearch] = useState('');
+    const [data, setData] = useState<{id_cliente: number; nombre: string; apellido: string; correo: string; contraseña:string;}[]>([]);
+    const [filterEmployees, setFilterEmployees] = useState<{id_cliente: number; nombre: string; apellido: string; correo: string; contraseña:string;}[]>([]);
+
+    useEffect(() => {
+        const getData = async () => {
+          try {
+            const res = await fetch("http://localhost:3000/api/client");
+            if (!res.ok) {
+              console.log("Error fetch");
+            } else {
+              const data = await res.json();
+              setData(data);
+            }
+          } catch (error) {
+            console.log("Error fetching data:", error);
+          }
+        };
+    
+        getData();
+      }, []);
+
+    useEffect(() => {
+        setFilterEmployees(data);
+        setFilterEmployees(data.filter((employee) => employee.nombre.toLowerCase().includes(search.toLowerCase())));
+    }, [search]);
 
     return (
         <div className="w-full flex justify-center">
