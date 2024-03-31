@@ -8,7 +8,7 @@ function dashboard() {
             <div className="mt-10">
               <SearchBar/>
             </div>
-            <div className="h-full mt-10 overflow-auto">
+            <div className="h-full mt-10 max-h-[515px] overflow-auto">
               <UsersTable/>
             </div>
         </div>
