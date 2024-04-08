@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useEffect, useState } from "react";
 
-export default function sign_In() {
+export default function Sign_In() {
 
     const [Password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");

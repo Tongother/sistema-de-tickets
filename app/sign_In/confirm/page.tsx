@@ -1,5 +1,5 @@
 "use client";
-export default function confirm() {
+export default function Confirm() {
 
     const handleSendEmail = async () => {
         const response = await fetch('/api/route', {
