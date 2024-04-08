@@ -2,8 +2,6 @@
 import axios from "axios";
 
 export default function Home() {
-  
-
     const handleClick = async() => {
     const res = await axios.post("/api/client", {
       nombre: "Gunther",

@@ -16,7 +16,7 @@ export default function RootLayout({
   children: JSX.Element | JSX.Element[];
 }>) {
 
-  Connection();
+ 
 
   return (
     <html lang="es">
