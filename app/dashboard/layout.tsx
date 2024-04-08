@@ -14,7 +14,7 @@ export default function dashboardLayaout({ children }: DashboardLayaoutProps) {
         </section>
 
         <section className="w-full flex flex-col">
-            <Header children={children}/>
+            <Header> {children} </Header>
         </section>
     </main>
     );

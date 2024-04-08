@@ -37,7 +37,7 @@ const UsersTable = () => {
         </thead>
         <tbody>
           {data.map((user) => (
-            <tr className="flex justify-around mb-[15px]">
+            <tr className="flex justify-around mb-[15px]" key={user.id_cliente}>
               <td className="min-w-[2em] text-center">{user.id_cliente}</td>
               <td className="min-w-[5em] max-w-[6em] text-center">{user.nombre}</td>
               <td className="min-w-[5em] max-w-[6em] text-center">{user.apellido}</td>
