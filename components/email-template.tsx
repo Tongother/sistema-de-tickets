@@ -1,3 +1,4 @@
+/* eslint react/no-unescaped-entities */
 import * as React from 'react';
 
 interface EmailTemplateProps {
