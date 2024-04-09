@@ -1,6 +1,7 @@
 import Connection from "@/database/Connection";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req:any, res:any) {
+export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     switch (req.method) {
         case "GET":
             return getClient(req, res);
@@ -10,13 +11,13 @@ export default async function handler(req:any, res:any) {
     }
 }
 
-const getClient = async (req:any, res:any) => {
+const getClient = async (req:NextApiRequest, res:NextApiResponse) => {
     const resultGet = await new Connection().Query(`SELECT * FROM clientes`);
     console.log(resultGet)
     return res.status(200).json(resultGet);
 }
 
-const saveClient = async (req:any, res:any) => {
+const saveClient = async (req:NextApiRequest, res:NextApiResponse) => {
 
     const {nombre, apellido, correo, contraseña} = req.body;
 

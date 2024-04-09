@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Connection from "@/database/Connection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +15,11 @@ export default function RootLayout({
   children: JSX.Element | JSX.Element[];
 }>) {
 
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> b1b66d9bc41c8d79a1ec2232285bee6ababb2b88
   return (
     <html lang="es">
       <body className={inter.className}>{children}</body>
