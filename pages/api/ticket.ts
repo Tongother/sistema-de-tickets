@@ -1,7 +1,7 @@
 import Connection from "@/database/Connection";
 
 export default async function (req: any, res:any){
-    if (req.method=== "GET"){
+    if (req.method === "GET"){
         return await getTicket(req, res);
     }
     else {
