@@ -6,11 +6,11 @@ const resend = new Resend("re_eSRGuPJp_Jy6B3JSJsUQ8J87ZbZQgQdzd");
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { data, error } = await resend.emails.send({
-    from: 'gunthernettel@gmail.com',
-    to: ['gunther.nettel36@unach.mx'],
+    from: 'Acme noreply@dominio.com',
+    to: ['delivered@resend.dev'],
     subject: 'Hello world',
     react: EmailTemplate({ firstName: 'Julian' }),
-    text: 'Te estamos vigilando Julian',
+    text: 'Quiubole',
   });
 
   if (error) {

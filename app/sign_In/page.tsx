@@ -12,7 +12,9 @@ export default function Sign_In() {
     useEffect(() => {
         if (Password === confirmPassword) {
             setAlertText(false);
-        } else {
+        } else if(confirmPassword === "" || Password === ""){
+            setAlertText(false);
+        }else{
             setAlertText(true);
         }
     }, [confirmPassword, Password]);
