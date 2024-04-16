@@ -1,7 +1,8 @@
 "use client"
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-const Tickets = ({ ticket }:any) => {
+const Tickets = () => {
     const [data, setData] = useState<{id: number; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: any;}[]>([]);
     useEffect (() => {
         const getData = async () => {
@@ -47,13 +48,15 @@ const Tickets = ({ ticket }:any) => {
         {data && data.length > 0 && (
             <div className="grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
                 {data.map((tickets) => (
-                    <div className="flex flex-wrap justify-center">
-                        <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
-                            <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
-                            <p className="text-sm">Estatus: {tickets.estatus}</p>
-                            <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
+                    <Link href={`/advisor/resolution/${tickets.id}`}>
+                        <div className="flex flex-wrap justify-center">
+                            <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
+                                <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
+                                <p className="text-sm">Estatus: {tickets.estatus}</p>
+                                <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             )}
