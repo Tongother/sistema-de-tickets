@@ -18,14 +18,13 @@ const dashboardInfo = [
 
 const headerInfo = { name: 'Julian Antonio', rol: 'Asesor técnico', src: tecnico.src }
 
-
   return (
     <main className="flex h-screen w-screen">
         <section className="w-[30%] bg-gray-900 text-white shadow-2xl">
             <Dashboard dashboardInfo={dashboardInfo} title='Asesor técnico'/>
         </section>
 
-        <section className="w-full flex flex-col">
+        <section className="w-full ">
             <Header headerInfo={headerInfo}> {children} </Header>
         </section>
     </main>

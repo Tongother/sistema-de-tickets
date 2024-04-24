@@ -6,12 +6,12 @@ export default class Connection {
 
   constructor() {
   const config = {
-    server: "ROGSTRIX\\SQLEXPRESS", // o "localhost"
+    server: "LAPTOPACERNITRO", // o "localhost"
     authentication: {
       type: "default",
       options: {  
-        userName: "ejemplo",
-        password: "ejemplo123@123",
+        userName: "JulianTcktSys",
+        password: "JcAs06-03-22",
       }
     },
     options: {
