@@ -6,19 +6,20 @@ export default class Connection {
 
   constructor() {
   const config = {
-    server: "ROGSTRIX\\SQLEXPRESS", // o "localhost"
+    server: "servidorwindcode.database.windows.net", // o "localhost"
     authentication: {
       type: "default",
       options: {  
-        userName: "ejemplo",
-        password: "ejemplo123@123",
+        userName: "adminsGJC",
+        password: "microsoftIsCool!.GJC",
       }
     },
     options: {
-      encrypt: false,
-      TrustServerCertificate: true,
+      encrypt: true,
+      TrustServerCertificate: false,
+      ConnectionTimeout: 30,
       port: 1433,
-      database: "ticketSystem",
+      database: "windcode",
     },
   };
   this.connection = new this.TediousConnection(config)
