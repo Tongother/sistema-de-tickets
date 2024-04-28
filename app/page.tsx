@@ -1,7 +1,12 @@
 "use client";
-import axios from "axios";
-import whats from "@/public/whats.jpeg"
+import { motion } from "framer-motion";
 import Image from "next/image";
+import logo from "@/public/logoWindCode.png";
+import mountain from "@/public/mountains.png";
+import leftChevron from "@/public/chevron-left-24.svg";
+import rightChevron from "@/public/chevron-right-24.svg";
+import ElementsMainPage from "@/components/ElementsMainPage";
+import HeaderMainPage from "@/components/HeaderMainPage";
 
 export default function Home() {
 //     const handleClick = async() => {
@@ -13,64 +18,48 @@ export default function Home() {
 //     });
 //     console.log(res);
 //     }
-      
+
   return (
     <>
-      <header className="font-medium min-h-[3em] bg-slate-50 flex justify-end">
-        <nav className="p-[1em] w-[20em]">
-          <ul className="flex justify-between">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
-            </li>
-            <li>
-              <a href="/contact">Soporte</a>
-            </li>
-          </ul>
-        </nav>
-        <div className="p-[1em]  w-[9em] mr-[2em]">
-          <ul className="flex justify-between">
-            <li>
-              <a href="/">Log in</a>
-            </li>
-            <li>
-              <a href="/about">Sign in</a>
-            </li>
-          </ul>
+      <main className="font-outfit">
+        <motion.section className={`h-[100vh] shadow-inner relative`} style={{backgroundImage: `url('${mountain.src}')`}}
+        initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 2, delay: 0, ease: [0, 0.71, 0.2, 1.01]}}> 
+        <HeaderMainPage/>
+        <div className="absolute inset-y-0 left-0 p-2 ml-6">
+            <Image src={logo.src} alt="Logo" quality={100} width={160} height={160} className="opacity-80 ml-4" />
         </div>
-      </header>
-      <main className="text-white h-[92.5vh]">
-        <section className="flex h-full">
-          <article className="relative w-[33.33%] bg-black h-full">
-            <Image src={whats.src} alt="Logo" fill={true} quality={100} className="hover:opacity-80"/>
-            <div className="w-full h-0 absolute inset-y-[5%]">
-              <div className="flex justify-center">
-                <h1 className="text-5xl">Dediccaión</h1>
-              </div>
-            </div>
+        <article className="w-full h-full flex justify-center items-center">
+          <div className="pb-32 flex flex-col items-center">
+            <motion.h1 className="text-6xl" initial={{opacity:0, y:-20}} 
+            animate={{opacity:1, y:0}} transition={{duration: 3, delay: 0.1, ease: [0, 0.71, 0.2, 1.01]}}>WindCodeInc</motion.h1>
+            <motion.p className="text-center mt-4" initial={{opacity:0}} 
+            animate={{opacity:1}} transition={{duration: 2, delay: 1, ease: [0, 0.71, 0.2, 1.01]}}>Construyendo innovadoras soluciones</motion.p>
+          </div>
+        </article>
+        </motion.section>
+
+        <section className="h-[80vh] relative flex justify-around items-center">
+
+          <article>
+            <Image src={mountain.src} alt="Montañas" width={600} height={600}/>
           </article>
-          <article className="relative w-[33.33%] bg-black h-full">
-            <Image src={whats.src} alt="Logo" fill={true} quality={100} className="hover:opacity-80" />
-            <div className="w-full h-0 absolute inset-y-[5%]">
-              <div className="flex justify-center">
-                <h1 className="text-5xl">Calidad</h1>
-              </div>
-            </div>
+
+          <article className="w-[25em]">
+            <h1 className="mb-[.5em] text-6xl font-bold">¿Quienes somos?</h1>
+            <p>Somos una empresa de desarrollo de software que se dedica a la creación de aplicaciones web y móviles, así como también a la creación de páginas web.</p>
           </article>
-          <article className="relative w-[33.33%] bg-black h-full">
-            <Image src={whats.src} alt="Logo" fill={true} quality={100} className="hover:opacity-80"/>
-            <div className="w-full h-0 absolute inset-y-[5%]">
-              <div className="flex justify-center">
-                <h1 className="text-5xl">Intuitivo</h1>
-              </div>
-            </div>
-          </article>
+
+          <motion.article className="absolute left-4" whileHover={{scale: 1.2}} transition={{duration: 0.2, type: "tween", ease: "easeOut"}}>
+            <Image src={leftChevron.src} alt="Chevron" width={40} height={40} className="cursor-pointer"/>
+          </motion.article>
+
+          <motion.article className="absolute right-4" whileHover={{scale: 1.2}} transition={{duration: 0.2, type: "tween", ease: "easeOut"}}>
+            <Image src={rightChevron.src} alt="Chevron" width={40} height={40} className="cursor-pointer"/>
+          </motion.article>
+
         </section>
+
+        <ElementsMainPage/>
       </main>
       <footer className="font-medium min-h-[3em] bg-blue-100">
         <p>Footer</p>
