@@ -10,7 +10,7 @@ export async function fetchUsersTable() {
 
 export async function fetchHistoryTable() {
     try {
-        const res = await fetch("http://localhost:3000/api/history" , {method: "GET"},);
+        const res = await fetch("https://windcodeinc.me/api/history" , {method: "GET"},);
         const data = await res.json();
 
         return data;

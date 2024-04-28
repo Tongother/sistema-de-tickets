@@ -6,7 +6,7 @@ export default class Connection {
 
   constructor() {
   const config = {
-    server: "servidorwindcode.database.windows.net", // o "localhost"
+    server: "servidorwindcode.database.windows.net",
     authentication: {
       type: "default",
       options: {  
