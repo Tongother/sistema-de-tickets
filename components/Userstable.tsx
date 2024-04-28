@@ -3,8 +3,7 @@ import { fetchUsersTable } from "@/app/lib/data";
 const UsersTable = async() => {
 
   const dataUsers = await fetchUsersTable();
-  const data = dataUsers;
-  console.log(data)
+  console.log(dataUsers)
   return (
    <>
     {dataUsers && dataUsers.length > 0 && (
