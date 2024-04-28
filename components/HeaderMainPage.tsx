@@ -1,10 +1,14 @@
+import Image from "next/image";
 import { motion, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import dropDown from "@/public/chevron-down-24.svg";
+import { FlyoutLink } from "./FlyoutLink";
+import { PricingContent } from "./PricingContent";
 
 export default function HeaderMainPage() {
-    
+
 let arrayTextMotion = [];
 let count = 0;
 for(let i = 0.1; count < 7 ; i = i + 0.2){
@@ -45,6 +49,8 @@ useMotionValueEvent(scrollY, "change", (latest) => {
         setBgColorNav("rgba(255, 255, 255, .8)");
     }
 });
+
+
     
     return(
         <motion.header className="font-medium min-h-[3em] w-full bg-transparent flex justify-end fixed z-10"
@@ -53,29 +59,33 @@ useMotionValueEvent(scrollY, "change", (latest) => {
             hidden: { y: "-100%" }
         }}
         animate={hidden ? "hidden" : "visible"}>
-        <nav className="p-[2em] w-[24em]">
+        <nav className="p-[2em] w-[28em]">
           <ul className="flex justify-between">
             <motion.li variants={arrayTextMotion[0]} initial="rest" animate="visible" whileHover="hover" className="">
-              <a href="/" className="hover:underline hover:decoration-solid hover:text-black z-10">Home</a>
+              <FlyoutLink href="/"> Inicio </FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[1]} initial="rest" animate="visible" whileHover="hover">
-              <a href="/about" className="hover:underline hover:decoration-solid hover:text-black z-10">About</a>
+              <FlyoutLink href="/" FlyoutContent={PricingContent}>
+                <span className="flex items-center z-10">
+                  Sobre nosotros<Image src={dropDown.src} alt="Drop" width={20} height={20} className="ml-1"></Image>
+                </span>
+              </FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[2]} initial="rest" animate="visible" whileHover="hover">
-              <a href="/contact" className="hover:underline hover:decoration-solid hover:text-black z-10">Contact</a>
+              <FlyoutLink href="/">Contactanos</FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[3]} initial="rest" animate="visible" whileHover="hover">
-              <a href="/contact" className="hover:underline hover:decoration-solid hover:text-black z-10">Soporte</a>
+              <FlyoutLink href="/">Soporte</FlyoutLink>
             </motion.li>
           </ul>
         </nav>
-        <div className="p-[2em] w-[12em] mr-[2em]">
+        <div className="p-[2em] w-[16em] mr-[1em]">
           <ul className="flex justify-between">
             <motion.li variants={arrayTextMotion[4]} initial="rest" animate="visible" whileHover="hover">
-              <Link href="/login" className="hover:underline hover:decoration-solid hover:text-black">Log in</Link>
+              <FlyoutLink href="/login">Inicia sesión</FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[5]} initial="rest" animate="visible" whileHover="hover">
-              <Link href="/login?sign=1" className="hover:underline hover:decoration-solid hover:text-black">Sign in</Link>
+              <FlyoutLink href="/login?sign=1">Registrate</FlyoutLink>
             </motion.li>
           </ul>
         </div>

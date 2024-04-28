@@ -1,12 +1,14 @@
 "use client";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import logo from "@/public/logoWindCode.png";
+import logoWindCode from "@/public/WindCodeHD.png";
 import mountain from "@/public/mountains.png";
 import leftChevron from "@/public/chevron-left-24.svg";
 import rightChevron from "@/public/chevron-right-24.svg";
 import ElementsMainPage from "@/components/ElementsMainPage";
 import HeaderMainPage from "@/components/HeaderMainPage";
+import { useEffect, useState } from "react";
+<link rel="icon" href="/favicon.ico" sizes="any" />
 
 export default function Home() {
 //     const handleClick = async() => {
@@ -19,6 +21,15 @@ export default function Home() {
 //     console.log(res);
 //     }
 
+const [objectFlyout, setObjectFlyout] = useState(true);
+useEffect(() => {
+  const handleOut = () => {
+    setObjectFlyout(false);
+  }
+
+  setTimeout(handleOut, 3000);
+}, []);
+
   return (
     <>
       <main className="font-outfit">
@@ -26,19 +37,32 @@ export default function Home() {
         initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 2, delay: 0, ease: [0, 0.71, 0.2, 1.01]}}> 
         <HeaderMainPage/>
         <div className="absolute inset-y-0 left-0 p-2 ml-6">
-            <Image src={logo.src} alt="Logo" quality={100} width={160} height={160} className="opacity-80 ml-4" />
+            <Image src={logoWindCode.src} alt="Logo" quality={100} width={160} height={160} className="opacity-80 ml-4" />
         </div>
         <article className="w-full h-full flex justify-center items-center">
-          <div className="pb-32 flex flex-col items-center">
+          <div className="pb-32 relative flex flex-col items-center">
             <motion.h1 className="text-6xl" initial={{opacity:0, y:-20}} 
-            animate={{opacity:1, y:0}} transition={{duration: 3, delay: 0.1, ease: [0, 0.71, 0.2, 1.01]}}>WindCodeInc</motion.h1>
+            animate={{opacity:1, y:0}} transition={{duration: 3, delay: 0.5, ease: [0, 0.71, 0.2, 1.01]}}>
+              WindCodeInc
+            </motion.h1>
+            <AnimatePresence>
+            {objectFlyout && <motion.span
+                className="absolute top-16 -left-0.5 -right-2 h-[4px]
+                origin-left rounded-full bg-black"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 2, delay: 0.5, ease: "easeOut"}}
+                >
+            </motion.span>}
+            </AnimatePresence>
             <motion.p className="text-center mt-4" initial={{opacity:0}} 
-            animate={{opacity:1}} transition={{duration: 2, delay: 1, ease: [0, 0.71, 0.2, 1.01]}}>Construyendo innovadoras soluciones</motion.p>
+            animate={{opacity:1}} transition={{duration: 4, delay: 2, ease: [0, 0.71, 0.2, 1.01]}}>Construyendo innovadoras soluciones</motion.p>
           </div>
         </article>
         </motion.section>
 
-        <section className="h-[80vh] relative flex justify-around items-center">
+        <section className="h-[80vh] relative flex justify-around items-center" id="Mision">
 
           <article>
             <Image src={mountain.src} alt="Montañas" width={600} height={600}/>
