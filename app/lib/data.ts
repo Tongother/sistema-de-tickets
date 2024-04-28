@@ -1,6 +1,6 @@
 export async function fetchUsersTable() {
     try {
-        const res = await fetch("https://windcodeinc.me/api/client", {next: {revalidate:60}});
+        const res = await fetch("https://windcodeinc.me/api/client");
         const data = await res.json();
         return data;
     } catch (error) {

@@ -1,6 +1,5 @@
 import Connection from "@/database/Connection";
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Error from "next/error";
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     switch (req.method) {
@@ -22,7 +21,6 @@ const getClient = async (req:NextApiRequest, res:NextApiResponse) => {
     }catch(e){
         return res.status(200).json({Error: `${e}`});
     }
-    // const resultGet = "hola";
 }
 
 const saveClient = async (req:NextApiRequest, res:NextApiResponse) => {
