@@ -1,3 +1,4 @@
+import { ConfigDB } from "./ConfigDB";
 export default class Connection {
 
   private TediousConnection = require('tedious').Connection;
@@ -6,20 +7,20 @@ export default class Connection {
 
   constructor() {
   const config = {
-    server: "servidorwindcode.database.windows.net",
+    server: ConfigDB.server,
     authentication: {
       type: "default",
       options: {  
-        userName: "adminsGJC",
-        password: "microsoftIsCool!.GJC",
+        userName: ConfigDB.user,
+        password: ConfigDB.password,
       }
     },
     options: {
       encrypt: true,
-      TrustServerCertificate: false,
-      ConnectionTimeout: 30,
-      port: 1433,
-      database: "windcode",
+      trustServerCertificate: false,
+      connectionTimeout: 30,
+      port: ConfigDB.port,
+      database: ConfigDB.database,
     },
   };
   this.connection = new this.TediousConnection(config)
