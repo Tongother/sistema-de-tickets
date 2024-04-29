@@ -1,11 +1,11 @@
 export async function fetchUsersTable() {
-    try {
-        const res = await fetch("https://www.windcodeinc.me/api/client")
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.log("Failed to fetch data: ", error);
-    }
+
+        const res = await fetch("https://www.windcodeinc.me/api/client").then(res => res.json()).then(res => {
+          if (res.error) {
+            throw new Error(res.error)
+          }
+          return res
+        })
 }
 
 export async function fetchHistoryTable() {
