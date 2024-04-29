@@ -13,7 +13,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
 const getClient = async (req:NextApiRequest, res:NextApiResponse) => {
     try{
-        res.setHeader("Cache-Control", "s-maxage=10, stale-while-revalidate");
         const resultGot = await new Connection().Query(`SELECT * FROM clientes`);
         return res.status(200).json(resultGot);
     }catch(e:string | any){
