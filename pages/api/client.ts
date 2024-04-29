@@ -16,8 +16,8 @@ const getClient = async (req:NextApiRequest, res:NextApiResponse) => {
         res.setHeader("Cache-Control", "s-maxage=10, stale-while-revalidate");
         const resultGot = await new Connection().Query(`SELECT * FROM clientes`);
         return res.status(200).json(resultGot);
-    }catch(e){
-        return res.status(200).json({Error:e});
+    }catch(e:string | any){
+        return res.status(200).json({error: e.toString()});
     }
 }
 
