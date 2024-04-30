@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { motion, useMotionValueEvent } from "framer-motion";
-import Link from "next/link";
 import { useScroll } from "framer-motion";
 import { useState } from "react";
 import dropDown from "@/public/chevron-down-24.svg";
