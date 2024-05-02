@@ -3,21 +3,29 @@ import { useScroll } from "framer-motion";
 import { motion, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
-export default function Footer() {
+import { doc } from "firebase/firestore";
 
-    const { scrollY } = useScroll();
+interface FooterProps{
+    limitScroll?: number | any;
+}
+
+export default function Footer() {
     const [hidden, setHidden] = useState(false);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        if ( latest < 1450 ) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY, scrollHeight = document.documentElement.scrollHeight, windowHeight = window.innerHeight;
+
+        const scrollPercentage = (document.documentElement.scrollHeight)*((scrollTop / (scrollHeight - windowHeight)));
+
+        if(scrollPercentage < document.documentElement.scrollHeight-300){
             setHidden(true);
-        }else {
+        }else{
             setHidden(false);
         }
     });
 
     return (
-    <motion.footer className="font-medium min-h-[14em] mt-16 border-solid border-2" 
+    <motion.footer className="font-medium min-h-[12em] mt-16 border-solid border-2" 
     style={{borderTopLeftRadius: "80px", borderStartEndRadius: "80px", boxShadow: "5px 10px 45px #bfaaff"}}
     variants={{
         visible: { y: 0},
@@ -36,9 +44,8 @@ export default function Footer() {
                 <hr className="mt-2 w-52 h-[1px] bg-gray-200 border-none"/>
                 <div className="mt-2">
                     <ul className="flex flex-col gap-1">
-                        <li><Link href="#" className="hover:underline">Inicio</Link></li>
-                        <li><Link href="#" className="hover:underline">Servicios</Link></li>
-                        <li><Link href="#" className="hover:underline">Acerca de nosotros</Link></li>
+                        <li><Link href="/compania" className="hover:underline">Nuestra compañia</Link></li>
+                        <li><Link href="empleados" className="hover:underline">Nuestros empleados</Link></li>
                     </ul>
                 </div>
             </article>
@@ -49,10 +56,7 @@ export default function Footer() {
                 <hr className="mt-2 w-52 h-[1px] bg-gray-200 border-none"/>
                 <div className="mt-2 flex flex-col gap-1">
                     <ul className="flex flex-col gap-1">
-                        <li><Link href="#" className="hover:underline">Servicios</Link></li>
-                        <li><Link href="#" className="hover:underline">Desarrollo de aplicaciones web y móviles</Link></li>
-                        <li><Link href="#" className="hover:underline">Diseño de interfaces de usuario</Link></li>
-                        <li><Link href="#" className="hover:underline">Consultoría en tecnología</Link></li>
+                        <li><Link href="/login" className="hover:underline">Soporte</Link></li>
                     </ul>
                 </div>
             </article>
