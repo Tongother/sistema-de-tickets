@@ -1,9 +1,7 @@
 "use client";
-import { useScroll } from "framer-motion";
 import { motion, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { doc } from "firebase/firestore";
 
 interface FooterProps{
     limitScroll?: number | any;
@@ -12,17 +10,22 @@ interface FooterProps{
 export default function Footer() {
     const [hidden, setHidden] = useState(false);
 
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY, scrollHeight = document.documentElement.scrollHeight, windowHeight = window.innerHeight;
+    useEffect(() => {
+        const handleScroll = () =>{
+            const scrollTop = window.scrollY, scrollHeight = document.documentElement.scrollHeight, windowHeight = window.innerHeight;
+            const scrollPercentage = (document.documentElement.scrollHeight)*((scrollTop / (scrollHeight - windowHeight)));
 
-        const scrollPercentage = (document.documentElement.scrollHeight)*((scrollTop / (scrollHeight - windowHeight)));
-
-        if(scrollPercentage < document.documentElement.scrollHeight-300){
-            setHidden(true);
-        }else{
-            setHidden(false);
+            if(scrollPercentage < document.documentElement.scrollHeight-300){
+                setHidden(true);
+            }else{
+                setHidden(false);
+            }
         }
-    });
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+    }, []);
 
     return (
     <motion.footer className="font-medium min-h-[12em] mt-16 border-solid border-2" 
