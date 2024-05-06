@@ -8,6 +8,7 @@ import rightChevron from "@/public/chevron-right-24.svg";
 import ElementsMainPage from "@/components/ElementsMainPage";
 import HeaderMainPage from "@/components/HeaderMainPage";
 import { useEffect, useState } from "react";
+import Footer from "@/components/Footer";
 <link rel="icon" href="/favicon.ico" sizes="any" />
 
 export default function Home() {
@@ -31,8 +32,8 @@ useEffect(() => {
 }, []);
 
   return (
-    <>
-      <main className="font-outfit">
+    <div className="overflow-hidden font-outfit">
+      <main>
         <motion.section className={`h-[100vh] shadow-inner relative`} style={{backgroundImage: `url('${mountain.src}')`}}
         initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 2, delay: 0, ease: [0, 0.71, 0.2, 1.01]}}> 
         <HeaderMainPage/>
@@ -85,9 +86,7 @@ useEffect(() => {
 
         <ElementsMainPage/>
       </main>
-      <footer className="font-medium min-h-[3em] bg-blue-100">
-        <p>Footer</p>
-      </footer>
-    </>
+      <Footer/>
+    </div>
   );
 }

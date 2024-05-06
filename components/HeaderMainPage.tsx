@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { motion, useMotionValueEvent } from "framer-motion";
-import Link from "next/link";
 import { useScroll } from "framer-motion";
 import { useState } from "react";
 import dropDown from "@/public/chevron-down-24.svg";
 import { FlyoutLink } from "./FlyoutLink";
 import { PricingContent } from "./PricingContent";
+import { set } from "firebase/database";
 
 export default function HeaderMainPage() {
 
@@ -34,9 +34,11 @@ count++;
 const { scrollY } = useScroll();
 
 const [hidden, setHidden] = useState(false);
+const [fixed, setFixed] = useState("fixed");
 const [bgColorNav, setBgColorNav] = useState("rgba(255, 255, 255, 0)");
 
 useMotionValueEvent(scrollY, "change", (latest) => {
+    setFixed(latest > 150 ? "top-0" : "fixed");
     const previous = scrollY.getPrevious();
     if (previous !== undefined && latest > previous && latest > 150) {
         setHidden(true);
@@ -53,7 +55,7 @@ useMotionValueEvent(scrollY, "change", (latest) => {
 
     
     return(
-        <motion.header className="font-medium min-h-[3em] w-full bg-transparent flex justify-end fixed z-10"
+        <motion.header className={`font-medium min-h-[3em] w-full bg-transparent flex justify-end ${fixed} z-10`}
         variants={{
             visible: { y: 0, backgroundColor: bgColorNav},
             hidden: { y: "-100%" }
@@ -72,7 +74,7 @@ useMotionValueEvent(scrollY, "change", (latest) => {
               </FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[2]} initial="rest" animate="visible" whileHover="hover">
-              <FlyoutLink href="/">Contactanos</FlyoutLink>
+              <FlyoutLink href="/contacto">Contactanos</FlyoutLink>
             </motion.li>
             <motion.li variants={arrayTextMotion[3]} initial="rest" animate="visible" whileHover="hover">
               <FlyoutLink href="/">Soporte</FlyoutLink>

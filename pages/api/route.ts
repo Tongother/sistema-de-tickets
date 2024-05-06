@@ -7,7 +7,7 @@ const resend = new Resend("re_eSRGuPJp_Jy6B3JSJsUQ8J87ZbZQgQdzd");
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { data, error } = await resend.emails.send({
     from: 'noreply@windcodeinc.me',
-    to: ['delivered@resend.dev'],
+    to: ['rubi30122004@gmail.com'],
     subject: 'Hello world',
     react: EmailTemplate({ firstName: 'Julian' }),
     text: 'Quiubole',
