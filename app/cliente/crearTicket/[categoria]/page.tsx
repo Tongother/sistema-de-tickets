@@ -3,8 +3,6 @@ import React from 'react'
 const FormCategoria = (params: any) => {
   const categoriaProblematica = params.categoria
   const idCliente=String();
-
-
   console.log(categoriaProblematica);
   return(
     <div>
