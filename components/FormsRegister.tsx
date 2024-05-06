@@ -7,6 +7,7 @@ import FondoLogin from '@/public/FondoLogin.png';
 import Image1 from '@/public/image1.png';
 import Image2 from '@/public/image2.png';
 import Image3 from '@/public/image3.png';
+import axios from 'axios';
 
 const obtenerMomentoDelDia = (): string => {
     const horaActual = new Date().getHours();
@@ -20,13 +21,55 @@ const obtenerMomentoDelDia = (): string => {
     }
 };
 
+
+
 export default function FormsRegister() {
     const momentoDelDia = obtenerMomentoDelDia();
-    const [inputActivo, setInputActivo] = useState({ nombre: false, apellido: false, email: false, contraseña: false });
-    const [contenidoInput, setContenidoInput] = useState({ nombre: '', apellido: '', email: '', contraseña: '' });
+    const [inputActivo, setInputActivo] = useState({ nombre: false, apellido: false, email: false, password: false });
+    const [contenidoInput, setContenidoInput] = useState({ nombre: '', apellido: '', email: '', password: '' });
     const [cambiarForm, setCambiarForm] = useState(false);
     const [cambiarSlider, setCambiarSlider] = useState({ bullet1: true, bullet2: false, bullet3: false });
     const [cambiarImagenSlider, setCambiarImagenSlider] = useState({ imagen1: true, imagen2: false, imagen3: false });
+    const [credentials, setCredentials] = useState({email: '', password: ''});
+    const [formData, setFormData] = useState({
+        nombre: '',
+        apellido: '',
+        email: '',
+        password: ''
+    });
+
+
+    const registerHandleSubmit = async (event:any) => {
+        const nameRegex = /^[A-Za-z\s]+$/;
+        if (!nameRegex.test(formData.nombre) || !nameRegex.test(formData.apellido)) {
+            alert('El nombre y el apellido no deben contener números ni caracteres especiales');
+            return;
+        }
+        try {
+            const response = await axios.post('/api/auth/register', formData);
+            console.log(response.data);
+            alert('Usuario registrado exitosamente');
+            // Aquí puedes realizar alguna acción adicional después de enviar los datos
+        } catch (error) {
+            console.error('Error al registrar usuario:', error);
+            alert('Hubo un error al registrar el usuario');
+        }
+    };
+
+    const registerHandleChange = (event:any) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
+
+    const loginHandleSubmit = async (event:any) => {
+        event.preventDefault();
+        console.log(credentials);
+        const response = await axios.post('/api/auth/login', credentials);
+        console.log(response);
+    };
+
+    const loginHandleChange = (event: any) => {
+        setCredentials({...credentials, [event.target.name]: event.target.value});
+    };
 
     const manejarImagen = (imagenName: string) => {
         setCambiarImagenSlider(prevState => ({
@@ -71,7 +114,7 @@ export default function FormsRegister() {
             <section className="box">
                 <div className="innerBox">
                     <article className="forms-wrap">
-                        <form className="sign-in-form">
+                        <form className="sign-in-form" onSubmit={(event) => {loginHandleSubmit(event);}}>
                             <div className="logo">
                                 <img src={WindCodeHD.src} alt="WindCode" width={120} height={120} />
                             </div>
@@ -88,11 +131,14 @@ export default function FormsRegister() {
                                         type="email"
                                         className={`input-field ${inputActivo.email || contenidoInput.email ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="email"
+                                        name="email"
                                         required
                                         onFocus={() => manejarFocus('email')}
                                         onBlur={() => manejarBlur('email')}
-                                        onChange={(event) => manejarCambio(event, 'email')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'email');
+                                            loginHandleChange(event); 
+                                        }}
                                     />
                                     <label>Correo</label>
                                 </div>
@@ -101,13 +147,16 @@ export default function FormsRegister() {
                                     <input
                                         type="password"
                                         minLength={8}
-                                        className={`input-field ${inputActivo.contraseña || contenidoInput.contraseña ? 'active' : ''}`}
+                                        className={`input-field ${inputActivo.password || contenidoInput.password ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="contraseña"
+                                        name="password"
                                         required
-                                        onFocus={() => manejarFocus('contraseña')}
-                                        onBlur={() => manejarBlur('contraseña')}
-                                        onChange={(event) => manejarCambio(event, 'contraseña')}
+                                        onFocus={() => manejarFocus('password')}
+                                        onBlur={() => manejarBlur('password')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'password');
+                                            loginHandleChange(event); 
+                                        }}
                                     />
                                     <label>Contraseña</label>
                                 </div>
@@ -119,7 +168,7 @@ export default function FormsRegister() {
                             </div>
                         </form>
 
-                        <form className="sign-up-form">
+                        <form className="sign-up-form" onSubmit={(event) => {registerHandleSubmit(event);}}>
                             <div className="logo">
                                 <Image src={`${WindCodeHD.src}`} alt="WindCode" width={120} height={120} />
                             </div>
@@ -136,11 +185,14 @@ export default function FormsRegister() {
                                         type="text"
                                         className={`input-field ${inputActivo.nombre || contenidoInput.nombre ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="nombre"
+                                        name="nombre"
                                         required
                                         onFocus={() => manejarFocus('nombre')}
                                         onBlur={() => manejarBlur('nombre')}
-                                        onChange={(event) => manejarCambio(event, 'nombre')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'nombre');
+                                            registerHandleChange(event); 
+                                        }}
                                     />
                                     <label>Nombre</label>
                                 </div>
@@ -149,11 +201,14 @@ export default function FormsRegister() {
                                         type="text"
                                         className={`input-field ${inputActivo.apellido || contenidoInput.apellido ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="apellido"
+                                        name="apellido"
                                         required
                                         onFocus={() => manejarFocus('apellido')}
                                         onBlur={() => manejarBlur('apellido')}
-                                        onChange={(event) => manejarCambio(event, 'apellido')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'apellido');
+                                            registerHandleChange(event); 
+                                        }}
                                     />
                                     <label>Apellidos</label>
                                 </div>
@@ -162,11 +217,14 @@ export default function FormsRegister() {
                                         type="email"
                                         className={`input-field ${inputActivo.email || contenidoInput.email ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="name"
+                                        name="email"
                                         required
                                         onFocus={() => manejarFocus('email')}
                                         onBlur={() => manejarBlur('email')}
-                                        onChange={(event) => manejarCambio(event, 'email')}
+                                        onChange={(event) => { 
+                                            manejarCambio(event, 'email');
+                                            registerHandleChange(event);
+                                        }}
                                     />
                                     <label>Correo</label>
                                 </div>
@@ -176,16 +234,37 @@ export default function FormsRegister() {
                                     <input
                                         type="password"
                                         minLength={8}
-                                        className={`input-field ${inputActivo.contraseña || contenidoInput.contraseña ? 'active' : ''}`}
+                                        className={`input-field ${inputActivo.password || contenidoInput.password ? 'active' : ''}`}
                                         autoComplete="off"
-                                        id="contraseña"
+                                        name="password"
                                         required
-                                        onFocus={() => manejarFocus('contraseña')}
-                                        onBlur={() => manejarBlur('contraseña')}
-                                        onChange={(event) => manejarCambio(event, 'contraseña')}
+                                        onFocus={() => manejarFocus('password')}
+                                        onBlur={() => manejarBlur('password')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'password');
+                                            registerHandleChange(event);
+                                        }}
                                     />
                                     <label>Contraseña</label>
                                 </div>
+                                <div className="input-wrap">
+                                    <input
+                                        type="password"
+                                        minLength={8}
+                                        className={`input-field ${inputActivo.password || contenidoInput.password ? 'active' : ''}`}
+                                        autoComplete="off"
+                                        name="confirmPassword"
+                                        required
+                                        onFocus={() => manejarFocus('password')}
+                                        onBlur={() => manejarBlur('password')}
+                                        onChange={(event) => {
+                                            manejarCambio(event, 'password');
+                                            registerHandleChange(event);
+                                        }}
+                                    />
+                                    <label>Confirm password</label>
+                                </div>
+                                
 
                                 <input type="submit" value="Registrarse" className="sign-btn" />
 
