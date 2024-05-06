@@ -1,9 +1,11 @@
 import React from 'react'
 
-const FormCategoria = (categoria: any) => {
-  const categoriaProblematica = categoria;
-  console.log(categoria);
-  //const idCliente = ;
+const FormCategoria = (params: any) => {
+  const categoriaProblematica = params.categoria
+  const idCliente=String();
+
+
+  console.log(categoriaProblematica);
   return(
     <div>
       <h1>dasdasda</h1>
