@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import MisionImage from "@/public/Mision.jpeg";
 import VisionImage from "@/public/vision.jpg";
-import ObjetivosImagen from "@/public/objetivos.png";
+import ObjetivosImagen from "@/public/Objetivos.png";
 import ValoresImagen from "@/public/Valores.jpg";
 
 <link rel="icon" href="/favicon.ico" sizes="any" />
