@@ -11,12 +11,12 @@ export async function fetchUsersTable() {
 }
 
 export async function fetchHistoryTable() {
-    try {
+    // try {
         const res = await fetch("http://localhost:3000/api/history" , {method: "GET"},);
         const data = await res.json();
 
         return data;
-    } catch (error) {
-        console.log("Failed to fetch data: ", error);
-    }
+    // } catch (error) {
+    //     console.log("Failed to fetch data: ", error);
+    // }
 }
