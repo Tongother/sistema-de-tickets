@@ -6,17 +6,20 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Alfon from "@/public/Alfonn.png";
 import Gun from "@/public/Gun.png";
-import Juli from "@/public/Julian.png";
+import Juli from "@/public/SrJulian.png";
 import Bisquet from "@/public/Pasquett.png";
 import OrganigramaWindCode from "@/public/Organigrama.jpg";
 
 export default function empleados() {
 
     const [hidden, setHidden] = useState([true, true, true, true]);
+    const [opacityImage, setOpacityImage] = useState(["opacity-40", "opacity-40", "opacity-40", "opacity-40"]);
 
     const handleMouseOver = (index:number) => {
         setHidden(hidden.map((value, i) => (i === index ? false : true)));
         setHidden(hidden.map((value, i) => (i === index ? false : true)));
+
+        setOpacityImage(opacityImage.map((value, i) => (i === index ? "opacity-100" : "opacity-40")));
       };
 
       const handleMouseOut = () => {
@@ -42,7 +45,7 @@ export default function empleados() {
                             <p className=" text-white mt-2 text-center">Estudiante en busca de conocimiento, nunca es suficiente. Me encanta programar, siempre busco nuevas maneras de hacer algoritmos de maneras más creativas y robustas.</p>
                         </div>
                     </motion.div>
-                    <Image src={Gun.src} alt="empleados" fill={true} quality={100} className="cursor-pointer opacity-60 hover:opacity-100" style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
+                    <Image src={Gun.src} alt="empleados" fill={true} quality={100} className={`cursor-pointer ${opacityImage[1]} hover:opacity-100`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
                 </article>
 
                 <article className="relative w-[50%]" onMouseOver={()=> handleMouseOver(2)} onMouseOut={handleMouseOut}>
@@ -58,7 +61,7 @@ export default function empleados() {
                             <p className=" text-white mt-2 text-center">Estudiante de desarrollo de software apasionado por la programación y el aprendizaje constante. Mi disciplina y mi curiosidad me impulsan a mejorar día a día, convencido de que cada error es una oportunidad de aprender y mejorar.</p>
                         </div>
                     </motion.div>
-                    <Image src={Juli.src} alt="empleados" fill={true} quality={100} className="cursor-pointer opacity-60 hover:opacity-100" style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
+                    <Image src={Juli.src} alt="empleados" fill={true} quality={100} className={`cursor-pointer ${opacityImage[2]} hover:opacity-100`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
                 </article>
             </section>
 
@@ -76,7 +79,7 @@ export default function empleados() {
                             <p className=" text-white mt-2 text-center">Estudiante de Licenciatura en Ingeniería en Desarrollo y tecnologías de Software  apasionado por la programación y el desarrollo. Con un enfoque en el aprendizaje continuo. Busco oportunidades para crecer y contribuir en el campo de la tecnología</p>
                         </div>
                     </motion.div>
-                    <Image src={Alfon.src} alt="empleados" fill={true} quality={100} className="cursor-pointer opacity-60 hover:opacity-80" style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
+                    <Image src={Alfon.src} alt="empleados" fill={true} quality={100} className={`cursor-pointer ${opacityImage[0]} hover:opacity-80`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
             </article>
             <article className="relative w-[50%]" onMouseOver={()=> handleMouseOver(3)} onMouseOut={handleMouseOut}>
                     <motion.div className="bg-neutral-800 opacity-70 absolute w-full h-[12em] bottom-0 flex flex-col items-center rounded-xl z-30"
@@ -91,7 +94,7 @@ export default function empleados() {
                             <p className=" text-white mt-2 text-center">Soy programador</p>
                         </div>
                     </motion.div>
-                    <Image src={Bisquet.src} alt="empleados" fill={true} quality={100} className="cursor-pointer opacity-60 hover:opacity-80" style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
+                    <Image src={Bisquet.src} alt="empleados" fill={true} quality={100} className={`cursor-pointer ${opacityImage[3]} hover:opacity-80"`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
             </article>
         </section>
             <section className="">
