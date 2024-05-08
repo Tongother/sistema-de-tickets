@@ -7,7 +7,7 @@ const Tickets = () => {
     useEffect (() => {
         const getData = async () => {
             try{
-                const res = await fetch ("http://localhost:3000/api/ticket");
+                const res = await fetch ("https://www.windcodeinc.me/api/ticket");
                 if (!res.ok){
                     console.log("No sirvió el fetch")
                 }

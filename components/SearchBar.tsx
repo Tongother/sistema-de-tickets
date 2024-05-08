@@ -10,7 +10,7 @@ const SearchBar = () => {
     useEffect(() => {
         const getData = async () => {
           try {
-            const res = await fetch("http://localhost:3000/api/client");
+            const res = await fetch("https://www.windcodeinc.me/api/client");
             if (!res.ok) {
               console.log("Error fetch");
             } else {

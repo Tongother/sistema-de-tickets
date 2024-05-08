@@ -1,22 +1,22 @@
 export async function fetchUsersTable() {
 
-    // const res = await fetch("http://localhost:3000/api/client");
-    // const data = await res.json();
+        const res = await fetch("https://www.windcodeinc.me/api/client");
+        const data = await res.json();
 
-    //     // if (data.error) {
-    //     //   throw new Error(data.error);
-    //     // }
+        if (data.error) {
+          throw new Error(data.error);
+        }
 
-    // return data;
+        return data;
 }
 
 export async function fetchHistoryTable() {
-    // try {
-    // const res = await fetch("http://localhost:3000/api/history" , {method: "GET"},);
-    // const data = await res.json();
+    try {
+        const res = await fetch("https://www.windcodeinc.me/api/history" , {method: "GET"},);
+        const data = await res.json();
 
-    // return data;
-    // } catch (error) {
-    //     console.log("Failed to fetch data: ", error);
-    // }
+        return data;
+    } catch (error) {
+        console.log("Failed to fetch data: ", error);
+    }
 }
