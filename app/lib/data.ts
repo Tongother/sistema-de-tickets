@@ -3,9 +3,9 @@ export async function fetchUsersTable() {
         const res = await fetch("http://localhost:3000/api/client");
         const data = await res.json();
 
-        if (data.error) {
-          throw new Error(data.error);
-        }
+        // if (data.error) {
+        //   throw new Error(data.error);
+        // }
 
         return data;
 }
