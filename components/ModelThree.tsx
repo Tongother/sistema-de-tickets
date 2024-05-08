@@ -5,7 +5,7 @@ import { FBXLoader } from 'three/examples/jsm/Addons.js';
 export default function ModelThree() {
 
 
-        const fbx = useLoader(FBXLoader, 'Objeto.fbx');
+        const fbx = useLoader(FBXLoader, 'Error_pageNotFound.fbx');
         
     
     return (

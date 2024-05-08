@@ -2,21 +2,22 @@
 import Footer from "@/components/Footer";
 import HeaderMainPage from "@/components/HeaderMainPage";
 import Image from "next/image";
-import githubIcon from "@/public/copilot.svg";
 import linkedln from "@/public/linkedln.png";
 import instagram from "@/public/instagram.png";
+import facebookIcono from "@/public/icono-facebook.svg";
+import tiktokIcono from "@/public/icon-tik-tok.svg";
 
 export default function Contacto() {
     return (
         <div className="overflow-hidden font-outfit">
-            <div className=" min-h-[5.5em]">
+            <div className=" min-h-[6em]">
                 <HeaderMainPage/>
             </div>
             <section className="w-full h-screen relative bg-black flex justify-around items-center">
                 <article className="pb-[5%]">
                     <h1 className="text-white text-center text-5xl font-bold">Contactanos</h1>
                     <ul className="flex flex-col items-start mt-4">
-                        <li className="text-white text-center">Telefono: 999-999-9999</li>
+                        <li className="text-white text-center">Telefono: +52 961 772 3715</li>
                         <li className="text-white text-center">Correo: info@windcodeinc.com</li>
                     </ul>
                 </article>
@@ -26,9 +27,9 @@ export default function Contacto() {
                 <article className="absolute bottom-0 w-full h-[6em] flex flex-col items-center text-black bg-violet-50">
                     <h1 className="my-2 font-bold text-lg">Redes sociales</h1>
                     <ul className="flex gap-32">
-                        <li><a href="https://www.github.com/" target="_blank" rel="noopener noreferrer"><Image src={githubIcon.src} alt="Github" width={40} height={40}/></a></li>
-                        <li><a href="https://www.linkedIn.com/" target="_blank" rel="noopener noreferrer"><Image src={linkedln.src} alt="Linkedln" width={40} height={40}/></a></li>
-                        <li><a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer"><Image src={instagram.src} alt="Instagram" width={40} height={40}/></a></li>
+                        <li><a href="https://www.facebook.com/share/KCMoJNxyfEnX6UDG/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer"><Image src={facebookIcono.src} alt="Facebook" width={40} height={40}/></a></li>
+                        <li><a href="https://www.tiktok.com/@windcodedev" target="_blank" rel="noopener noreferrer"><Image src={tiktokIcono.src} alt="Tiktok" width={40} height={40}/></a></li>
+                        <li><a href="https://www.instagram.com/windcode_dev/" target="_blank" rel="noopener noreferrer"><Image src={instagram.src} alt="Instagram" width={40} height={40}/></a></li>
                     </ul>
                 </article>
             </section>

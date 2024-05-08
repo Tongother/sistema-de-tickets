@@ -6,9 +6,11 @@ interface FlyoutLinkProps {
     children: React.ReactNode;
     href: string;
     FlyoutContent?: any;
+    FlyoutColor: string;
+    FlyoutColorText: string;
 }
 
-export const FlyoutLink = ({ children, href, FlyoutContent }:FlyoutLinkProps) => {
+export const FlyoutLink = ({ children, href, FlyoutContent, FlyoutColor, FlyoutColorText }:FlyoutLinkProps) => {
 
     const [open, setOpen] = useState(false);
 
@@ -21,14 +23,14 @@ export const FlyoutLink = ({ children, href, FlyoutContent }:FlyoutLinkProps) =>
         <div 
         onMouseEnter={() => setOpen(true)} 
         onMouseLeave={() => setOpen(false)} 
-        className="group relative h-fit w-fit hover:text-black">
+        className={`group relative h-fit w-fit ${FlyoutColorText}`}>
 
-            <Link href={href} className="relative">
+            <Link href={href} className={`relative`}>
                 {children}
-                <span style={{transform: showFlyout ? "scaleX(.95)" : "scaleX(0)"}}
-                className="absolute -bottom-1 -left-1 -right-2 h-[3px]
-                origin-left rounded-full bg-black transition-transform
-                duration-300 ease-out">
+                <span style={{transform: showFlyout ? "scaleX(1)" : "scaleX(0)"}}
+                className={`absolute -bottom-1 -left-2 -right-2 h-[3px]
+                origin-left rounded-full ${FlyoutColor} transition-transform
+                duration-300 ease-out `}>
                 </span>
             </Link>
             <AnimatePresence>

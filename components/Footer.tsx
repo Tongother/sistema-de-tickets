@@ -15,9 +15,9 @@ export default function Footer() {
             const scrollTop = window.scrollY, scrollHeight = document.documentElement.scrollHeight, windowHeight = window.innerHeight;
             const scrollPercentage = (document.documentElement.scrollHeight)*((scrollTop / (scrollHeight - windowHeight)));
 
-            if(scrollPercentage < document.documentElement.scrollHeight-300){
+            if(scrollPercentage < document.documentElement.scrollHeight-200){
                 setHidden(true);
-            }else{
+            }else if(scrollPercentage > document.documentElement.scrollHeight-200){
                 setHidden(false);
             }
         }
@@ -71,8 +71,8 @@ export default function Footer() {
                 <div className="mt-2 flex flex-col gap-1">
                     <ul className="flex flex-col gap-1">
                         <li>Correo electrónico: info@windcodeinc.com</li>
-                        <li>Teléfono: +1 123 456 7890</li>
-                        <li>Dirección: 123 Calle Principal, Ciudad, País</li>
+                        <li>Teléfono: +52 961 772 3715</li>
+                        <li>Dirección: Blvd. Belisario Domínguez 2001,<br/> Sin Nombre, Tuxtla Gutiérrez, Chis.</li>
                     </ul>
                 </div>
             </article>
