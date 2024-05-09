@@ -1,10 +1,8 @@
 'use client'
 import Link from "next/link";
 import Image from "next/image";
-import logoutimage from '@/public/logout.png';
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 import WindCodeHD from '@/public/WindCodeHD.png'
 
 interface DashboardProps {
