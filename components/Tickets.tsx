@@ -7,7 +7,7 @@ const Tickets = () => {
     useEffect (() => {
         const getData = async () => {
             try{
-                const res = await fetch (`${process.env.NEXT_PUBLIC_BACKEND_URL}/ticket`);
+                const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/ticket`);
                 if (!res.ok){
                     console.log("No sirvió el fetch")
                 }

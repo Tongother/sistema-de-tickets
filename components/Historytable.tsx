@@ -5,6 +5,9 @@ const HistoryTable = async() => {
     console.log(fetchHistoryTable);
     return (
         <>
+            <section className="">
+                <h1>Historial de tickets resueltos</h1>
+            </section>
             {dataHistory && (
             <table className="table-auto">
                 <thead>

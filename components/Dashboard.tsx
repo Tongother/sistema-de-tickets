@@ -33,12 +33,12 @@ export default function Dashboard({dashboardInfo, title}:DashboardProps) {
             <section className=" h-[540px] w-[260px] text-white font-outfit rounded-[15px] mt-6 ml-3 mb-4 shadow-md">
                 <article className="my-6">
                     <div>
-                        <Image src={`${ClienteIcon}`} width={80} height={50} alt=""/>
+                        <Image src={`${ClienteIcon.src}`} width={80} height={50} alt=""/>
                     </div>
                     <h1 className="text-[35px] font-outfit font-bold ml-6">{title}</h1>
                 </article>
-                {dashboardInfo.map((info) => (
-                    <Link href={info.redirect}>
+                {dashboardInfo.map((info, index) => (
+                    <Link href={info.redirect} key={index}>
                     <article className="flex items-center p-[15px] pl-[20px] cursor-pointer border-transparent border-b hover:border-double text-slate-500 hover:bg-gradient-to-r from-[#F0EDFF] to-[#DDE4FE] hover:text-[#8C55FF]">
                         <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
                     </article>
