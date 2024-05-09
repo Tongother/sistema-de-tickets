@@ -1,5 +1,6 @@
-import Connection from "@/database/Connection";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { sql } from '@vercel/postgres';
+import { db } from '@vercel/postgres';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function (req: NextApiRequest, res:NextApiResponse){
     if (req.method === "GET"){
@@ -10,11 +11,14 @@ export default async function (req: NextApiRequest, res:NextApiResponse){
     };
 };
 const getHistoryTicket = async (req: NextApiRequest, res:NextApiResponse) =>{
+    const client = await db.connect();
     try{
-        const resultGet = await new Connection().Query(`SELECT * FROM historial_tickets`);
-        return res.status(200).json(resultGet);
+        const history = await sql`SELECT * FROM historial_tickets;`;
+        return res.status(200).json({ clientes: history.rows });
     }catch(error){
         console.log(error)
         return res.status(500).json({error: error});
+    }finally{
+        client.release();
     }
 };
