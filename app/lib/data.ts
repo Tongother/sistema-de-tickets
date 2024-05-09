@@ -1,13 +1,14 @@
 export async function fetchUsersTable() {
 
+    try{
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/client`, {method: "GET"});
         const data = await res.json();
 
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
         return data;
+
+    }catch(error){
+    }
 }
 
 export async function fetchHistoryTable() {
