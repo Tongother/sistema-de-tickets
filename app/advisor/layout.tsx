@@ -43,7 +43,7 @@ export default function AdvisorLayout({ children }: AdvisorLayoutProps) {
   const headerInfo = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: tecnico.src, }
 
   return(
-    <main className='h-screen w-screen flex'>
+    <main className='h-screen w-screen flex '>
         <section className="w-[300px] flex items-end justify-end">
             <Dashboard dashboardInfo={dashboardInfo} title='Cliente'/>
         </section>
