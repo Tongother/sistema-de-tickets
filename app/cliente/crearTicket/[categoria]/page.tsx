@@ -38,15 +38,16 @@ const FormCategoria = (params: any) => {
     console.log(response);
   };
   return(
+    
       <div className='flex flex-col h-[70%] w-[50%] place-items-center justify-center bg-white rounded-[50px] p-[2%]'> 
         <div className='w-full h-[20%] flex place-items-center text-center justify-center'>
-          <h1 className=' text-2xl'>Sistema de Tickets</h1>
+            <h1 className=' text-2xl'>Sistema de Tickets</h1>
         </div>
         <form onSubmit={(event) => {loginHandleSubmit(event);}} className='h-[80%] w-full p-5 flex flex-col mt-2 m-6'>
             <label htmlFor="descripcionInput" className=' text-2xl'>Descripción del problema</label>
-            <input type="text" id='descripcionInput' className='h-[150px] border border-gray-300 rounded-xl shadow-sm hover:shadow-md p-5 mt-6'/>
+            <input type="text" id='descripcionInput' className='h-[150px] border border-gray-300 rounded-xl shadow-sm overflow-hidden hover:shadow-md p-5 mt-6'/>
             <div className='flex justify-center'>
-              <input type="button" value="Enviar" className=' border border-gray-200 shadow-md w-[200px] h-[30px] mt-6 hover:bg-violet-50 rounded-[10px]'/>
+                <input type="button" value="Enviar" className=' border border-gray-200 shadow-md w-[200px] h-[30px] mt-6 hover:bg-violet-50 rounded-[10px]'/>
             </div>
         </form>
       </div>
