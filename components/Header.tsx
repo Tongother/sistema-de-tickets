@@ -76,11 +76,7 @@ export default function Header({ children, headerInfo }: HeaderProps) {
 
             </article>
             <article className="w-full h-full flex items-start justify-center">
-                <div className="w-full h-[534px] flex justify-center items-center">
-                    <div className="w-[1160px] mr-3 h-full bg-[#FFFF] rounded-[30px] shadow-md">
-                        {children}
-                    </div>
-                </div>
+                {children}
             </article>
         </div>
     );
