@@ -1,35 +1,21 @@
-import Connection from "@/database/Connection";
-import type { NextApiRequest, NextApiResponse } from 'next';
-
-export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-    switch (req.method) {
-        case "GET":
-            return getClient(req, res);
-
-        case "POST":
-            return await saveClient(req, res);
-    }
+import { sql } from '@vercel/postgres';
+import { db } from '@vercel/postgres';
+import { NextApiRequest, NextApiResponse } from 'next';
+ 
+export default async function GET(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+    const client = await db.connect();
+  try {
+    await client.sql`CREATE TABLE IF NOT EXISTS Pets ( Name varchar(255), Owner varchar(255));`;
+    // const names = ["Fiona", "Lucy"]
+    // await client.sql`INSERT INTO Pets (Name, Owner) VALUES (${names[0]}, ${names[1]});`;
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+ 
+  const pets = await sql`SELECT * FROM Pets;`;
+  return res.status(200).json({ pets: pets.rows });
 }
 
-const getClient = async (req:NextApiRequest, res:NextApiResponse) => {
-    try{
-        const resultGot = await new Connection().Query(`SELECT * FROM clientes`);
-        return res.status(200).json(resultGot);
-    }catch(e:string | any){
-        return res.status(200).json({error: e.toString()});
-    }
-}
-
-const saveClient = async (req:NextApiRequest, res:NextApiResponse) => {
-
-    const {nombre, apellido, correo, contraseña} = req.body;
-
-    const result = await new Connection().Query(`INSERT INTO clientes (nombre, apellido, correo, contraseña) 
-        VALUES('${nombre}', 
-        '${apellido}', 
-        '${correo}', 
-        '${contraseña}')`);
-
-    return res.status(200).json({nombre, apellido, correo, contraseña});
-
-}

@@ -10,6 +10,11 @@ export default async function (req: NextApiRequest, res:NextApiResponse){
     };
 };
 const getHistoryTicket = async (req: NextApiRequest, res:NextApiResponse) =>{
-    const resultGet = await new Connection().Query(`SELECT * FROM historial_tickets`);
-    return res.status(200).json(resultGet);
+    try{
+        const resultGet = await new Connection().Query(`SELECT * FROM historial_tickets`);
+        return res.status(200).json(resultGet);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json({error: error});
+    }
 };

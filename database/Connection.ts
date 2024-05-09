@@ -1,6 +1,6 @@
 import { ConfigDB } from "./ConfigDB";
-export default class Connection {
 
+export default class Connection {
   private TediousConnection = require('tedious').Connection;
   private RequestTedious = require('tedious').Request;
   private connection:any;
@@ -17,6 +17,7 @@ export default class Connection {
     },
     options: {
       encrypt: true,
+      packetSize: 32768,
       trustServerCertificate: false,
       connectionTimeout: 30,
       port: ConfigDB.port,
