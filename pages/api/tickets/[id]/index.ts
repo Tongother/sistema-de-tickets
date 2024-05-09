@@ -12,6 +12,6 @@ export default async function (req: NextApiRequest, res:NextApiResponse){
 };
 const getTicket = async (req: NextApiRequest, res: NextApiResponse) =>{
     const {id}  = req.query;
-    const resultGet = await new Connection().Query(`SELECT * FROM ticket_preview WHERE id = ${id}`);
+    const resultGet = await new Connection().Query(`SELECT * FROM tickets WHERE id_ticket = ${id}`);
     return res.status(200).json(resultGet);
 };
