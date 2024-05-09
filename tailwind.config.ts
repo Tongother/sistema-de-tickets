@@ -15,6 +15,8 @@ const config: Config = {
       },
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
+        sans: ['Open Sans', 'sans-serif'],
+        tilt: ['Tilt Warp', 'sans-serif'],
       },
       keyframes: {
         carrousel: {
