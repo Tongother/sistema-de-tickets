@@ -27,22 +27,22 @@ export default function Dashboard({dashboardInfo, title}:DashboardProps) {
         }
     };
     return (
-        <div className="bg-[#0E182C] flex flex-col h-full w-full p-5">
-            <div className="w-[160px] h-[45px] ml-7">
-                <Image src={`${WindCodeHD.src}`} width={80} height={50} alt=""/>
+        <div className="bg-[#0E182C] flex flex-col h-full w-full pt-6">
+            <div className="text-white flex flex-row pl-1">
+                <div>
+                    <Image src={`${ClienteIcon.src}`} width={60} height={50} alt=""/>
+                </div>
+                <div className="font-outfit font-medium">
+                    <h1 className="text-[20px] ml-6">{title}</h1>
+                    <h2 className="text-[15px] mt-0 pt-0 ml-6" >lorem ipsum</h2>
+                </div>
             </div>
-            <section className=" h-[540px] w-[260px] text-white font-outfit rounded-[15px] mt-6 ml-3 mb-4 shadow-md">
-                <article className="my-6">
-                    <div>
-                        <Image src={`${ClienteIcon}`} width={80} height={50} alt=""/>
-                    </div>
-                    <h1 className="text-[35px] font-outfit font-bold ml-6">{title}</h1>
-                </article>
+            <section className="h-full w-full text-white font-outfit flex flex-col">
                 {dashboardInfo.map((info) => (
                     <Link href={info.redirect}>
-                    <article className="flex items-center p-[15px] pl-[20px] cursor-pointer border-transparent border-b hover:border-double text-slate-500 hover:bg-gradient-to-r from-[#F0EDFF] to-[#DDE4FE] hover:text-[#8C55FF]">
-                        <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
-                    </article>
+                        <article className="flex items-center mt-3 w-[275px] p-[15px] pl-[20px] cursor-pointer border-none rounded-r-[12px] text-slate-500  hover:bg-[#1F283D] hover:text-white">
+                            <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
+                        </article>
                     </Link>
                 ))}
             </section>

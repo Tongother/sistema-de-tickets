@@ -24,16 +24,13 @@ export default function DashboardLayaout({ children }: DashboardLayaoutProps) {
     const headerInfo = { name: 'Gunther Nettel', rol: 'Administrador', src: avatar.src }
 
     return(
-    <main className='h-screen w-screen flex items-center justify-center bg-gradient-to-r from-[#D0C7F8] to-[#CCC4FC]'>
-        <div className="flex h-[90%] w-[98%] bg-gradient-to-r from-[#F0EDFF] via-[#C1D7FD] to-[#E4D4E7] rounded-[25px]">
-            <section className=" w-[300px] flex items-end justify-end">
-                <Dashboard dashboardInfo={dashboardInfo} title='Admin'/>
+        <main className='h-screen w-screen flex'>
+            <section className="w-[300px] flex items-end justify-end">
+                <Dashboard dashboardInfo={dashboardInfo} title='Cliente'/>
             </section>
-
-            <section className="w-[1210px] flex flex-col">
+            <section className="w-[1235px] flex flex-col">
                 <Header headerInfo={headerInfo}> {children} </Header>
             </section>
-        </div>
-    </main>
+        </main>
     );
 }
