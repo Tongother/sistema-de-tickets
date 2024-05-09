@@ -10,8 +10,8 @@ interface HeaderProps{
 
 export default function Header({children, headerInfo}:HeaderProps){
     return(
-        <div className="flex flex-col place-content-start justify-center h-full">
-            <article className=" w-full h-[100px] grid grid-rows-1 grid-cols-2">
+        <div className="bg-[#FFFF] w-full flex flex-col place-content-start justify-center h-full">
+            <article className="w-full h-[110px] grid grid-rows-1 grid-cols-2 border-b-2 border-slate-300">
                 <div className="h-full w-full rounded-l-[30px] flex flex-row items-center">
                     <div className="w-[250px] h-full flex items-center justify-center">
                         <h1 className="font-outfit text-2xl">Soporte técnico</h1>
@@ -26,11 +26,7 @@ export default function Header({children, headerInfo}:HeaderProps){
                 </div>
             </article>
             <article className="w-full h-full flex items-start justify-center">
-                <div className='w-full h-[534px] flex justify-center items-center'>
-                    <div className='w-[1160px] mr-3 h-full bg-[#FFFF] rounded-[30px] shadow-md'>
-                        {children}
-                    </div>
-                </div>
+                {children}
             </article>
         </div>
     )

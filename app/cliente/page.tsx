@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function cliente(){
     return(
-        <section className="w-[80%] bg-slate-0 container m-auto">
+        <section className="h-full w-full m-auto">
             <div className="w-full h-[10%] flex items-center">
                 <h1 className="w-[12.2em] m-auto text-2xl ">¿Qué problema presenta?</h1>
             </div>
