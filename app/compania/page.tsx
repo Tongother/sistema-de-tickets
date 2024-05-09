@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import HeaderMainPage from "@/components/HeaderMainPage";
 import Footer from "@/components/Footer";
 import { FlyoutLink } from "@/components/FlyoutLink";
