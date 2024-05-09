@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import Connection from "@/database/Connection";
 import jwt from 'jsonwebtoken';
 import { serialize } from "cookie";
+const superTokenSecretKey = process.env.JWT_SECRET_KEY;
 
 export default async function loginHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
@@ -13,7 +14,6 @@ export default async function loginHandler(req: NextApiRequest, res: NextApiResp
             if (!data.correo || !(await bcrypt.compare(password, data.password))) {
                 return res.status(401).json({ error: 'Credenciales inválidas' });
             }
-
             const token = jwt.sign({
                 exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
                 id: data.id,
@@ -21,7 +21,7 @@ export default async function loginHandler(req: NextApiRequest, res: NextApiResp
                 apellido: data.apellido,
                 email: data.correo,
                 tipoUsuario: data.tipo_usuario
-            }, 'secret');
+            }, superTokenSecretKey as string);
 
             const serialized = serialize('auth', token, {
                 httpOnly: true,
@@ -31,7 +31,7 @@ export default async function loginHandler(req: NextApiRequest, res: NextApiResp
                 path: '/'
             });
             res.setHeader('Set-Cookie', serialized);
-            return res.status(200).json('Logueado correctamente');
+            return res.status(200).json({message:'Logueado correctamente', tipoUsuario: data.tipo_usuario});
 
         } catch (error) {
             console.error('Error en el proceso de inicio de sesión:', error);
