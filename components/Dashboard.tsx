@@ -4,6 +4,8 @@ import Image from "next/image";
 import logoutimage from '@/public/logout.png';
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { div } from "three/examples/jsm/nodes/Nodes.js";
+import WindCodeHD from '@/public/WindCodeHD.png'
 
 interface DashboardProps {
     dashboardInfo: {name:string, src: string, redirect: string}[];
@@ -24,27 +26,23 @@ export default function Dashboard({dashboardInfo, title}:DashboardProps) {
         }
     };
     return (
-        <>
-            <article className="w-full h-[6em] flex items-center justify-center">
-                <h1 className="text-xl">{title}</h1>
+        <div className="flex flex-col h-full w-full p-5">
+            <div className="w-[160px] h-[45px] flex ml-3">
+                <Image src={`${WindCodeHD.src}`} width={80} height={50} alt=""/ >
+            </div>
+            <article className="inline-block my-6 ml-2 justify-self-center">
+                <h1 className=" text-[30px] font-outfit font-bold inline">{title}</h1>
             </article>
 
-            <section className="">
-                {dashboardInfo.map((info, index) => (
-                    <Link key={index} href={info.redirect}>
-                    <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                        <Image src={`${info.src}`} alt="Personas" width={40} height={40}/>
-                        <h1 className="ml-2">{info.name}</h1>
+            <section className=" h-[520px] w-[260px] bg-white text-black font-outfit rounded-[15px] ml-3 mb-4 shadow-md">
+                {dashboardInfo.map((info) => (
+                    <Link href={info.redirect}>
+                    <article className="flex items-center p-[15px] pl-[20px] cursor-pointer border-transparent border-b hover:border-double text-slate-500 hover:bg-gradient-to-r from-[#F0EDFF] to-[#DDE4FE] hover:text-[#8C55FF]">
+                        <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
                     </article>
                     </Link>
                 ))}
-                <Link href = '/' onClick={logout}>
-                    <article className="flex items-center ml-[5%] mr-[5%] mb-[5px] rounded-lg p-[10px] cursor-pointer border-2 border-transparent hover:border-double hover:bg-blue-900">
-                        <Image src={logoutimage.src} alt="Personas" width={40} height={40}/>
-                        <h1 className="ml-2">Cerrar sesión</h1>
-                    </article>
-                </Link>
             </section>
-        </>
+        </div>
     )
 }
