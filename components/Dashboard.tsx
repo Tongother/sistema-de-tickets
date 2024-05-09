@@ -28,7 +28,7 @@ export default function Dashboard({dashboardInfo, title}:DashboardProps) {
     return (
         <div className="flex flex-col h-full w-full p-5">
             <div className="w-[160px] h-[45px] flex ml-3">
-                <Image src={`${WindCodeHD.src}`} width={80} height={50} alt=""/ >
+                <Image src={`${WindCodeHD.src}`} width={80} height={50} alt=""/>
             </div>
             <article className="inline-block my-6 ml-2 justify-self-center">
                 <h1 className=" text-[30px] font-outfit font-bold inline">{title}</h1>
