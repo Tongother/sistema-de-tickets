@@ -21,7 +21,7 @@ export default function DashboardLayaout({ children }: DashboardLayaoutProps) {
         { name: 'Reportes', src: lista.src, redirect: "" }
     ];
 
-    const headerInfo = { name: 'Gunther Nettel', rol: 'Administrador', src: avatar.src }
+    const headerInfo = { name: 'Gunther Nettel', email: 'fulano@tupu.tamadre', rol: 'Administrador', src: avatar.src }
 
     return(
     <main className='h-screen w-screen flex items-center justify-center bg-gradient-to-r from-[#D0C7F8] to-[#CCC4FC]'>
