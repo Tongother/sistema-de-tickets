@@ -2,7 +2,6 @@
 import Footer from "@/components/Footer";
 import HeaderMainPage from "@/components/HeaderMainPage";
 import Image from "next/image";
-import linkedln from "@/public/linkedln.png";
 import instagram from "@/public/instagram.png";
 import facebookIcono from "@/public/icono-facebook.svg";
 import tiktokIcono from "@/public/icon-tik-tok.svg";

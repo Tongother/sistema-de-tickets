@@ -23,7 +23,7 @@ export default function AdvisorLayout({ children }: AdvisorLayoutProps) {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const response = await axios.get('https://www.windcodeinc.me/api/profile', {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
           withCredentials: true, 
         });
         setUserData(response.data);

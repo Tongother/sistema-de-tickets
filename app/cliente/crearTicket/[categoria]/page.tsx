@@ -23,7 +23,7 @@ const FormCategoria = (params: any) => {
       const getProfile = async()=> {
           try{
               //res recibe un array de objetos con toda la información de la petición de axios, incluyendo la propiedad data que contiene la información de la cookie
-              const res = await axios.get('http://localhost:3000/api/profile',{withCredentials: true});
+              const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`,{withCredentials: true});
               setUserData(res.data);
           }
           catch(error){

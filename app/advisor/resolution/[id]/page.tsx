@@ -1,5 +1,5 @@
 async function loadTicket(id:number){
-    const res = await fetch(`https://www.windcodeinc.me/api/tickets/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${id}`);
     const data = await res.json();
     console.log(data);
     return data;
