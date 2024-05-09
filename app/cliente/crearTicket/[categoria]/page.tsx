@@ -39,15 +39,13 @@ const FormCategoria = (params: any) => {
   };
   return(
     
-      <div className='flex flex-col h-[70%] w-[50%] place-items-center justify-center bg-white rounded-[50px] p-[2%]'> 
-        <div className='w-full h-[20%] flex place-items-center text-center justify-center'>
-            <h1 className=' text-2xl'>Sistema de Tickets</h1>
-        </div>
-        <form onSubmit={(event) => {loginHandleSubmit(event);}} className='h-[80%] w-full p-5 flex flex-col mt-2 m-6'>
-            <label htmlFor="descripcionInput" className=' text-2xl'>Descripción del problema</label>
-            <input type="text" id='descripcionInput' className='h-[150px] border border-gray-300 rounded-xl shadow-sm overflow-hidden hover:shadow-md p-5 mt-6'/>
+      <div className='flex flex-col h-full w-full bg-white justify-center items-center'> 
+        <form onSubmit={(event) => {loginHandleSubmit(event);}} className='shadow-lg h-[500px] w-[650px] p-7 flex flex-col first-letter:border rounded-[30px]'>
+            <h1 className=' text-3xl text-center my-7 mt-4 text-gray-700'>Sistema de Tickets</h1>
+            <label htmlFor="descripcionInput" className=' text-xl mt-7'>Descripción del problema</label>
+            <textarea name="des" id="144" className='focus:outline-none focus:shadow-lg h-[225px] min-h-[225px] max-h-[225px] border border-gray-300 rounded-xl shadow-sm overflow-hidden hover:shadow-md p-5 mt-6'></textarea>
             <div className='flex justify-center'>
-                <input type="button" value="Enviar" className=' border border-gray-200 shadow-md w-[200px] h-[30px] mt-6 hover:bg-violet-50 rounded-[10px]'/>
+                <input type="button" value="Enviar" className='shadow-md w-[200px] h-[45px] mt-6 hover:bg-violet-50 rounded-[10px]'/>
             </div>
         </form>
       </div>
