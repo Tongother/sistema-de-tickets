@@ -41,7 +41,9 @@ export default function AdvisorLayout({ children }: AdvisorLayoutProps) {
   ];
 
   const headerInfo = {
-    name: userData ? userData.nombre : '', 
+    name: userData ? userData.nombre : '',
+    apellido: userData ? userData.apellido: '',
+    email: userData ? userData.email: '',
     rol: userData ? userData.tipoUsuario : '',
     src: tecnico.src
   };
