@@ -1,7 +1,7 @@
 import { fetchHistoryTable } from "@/app/lib/data";
 
 const HistoryTable = async() => {
-    const dataHistory = await fetchHistoryTable();
+    const dataHistory = ["", ""];
     console.log(fetchHistoryTable);
     return (
         <>
