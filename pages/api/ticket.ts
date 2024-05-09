@@ -1,4 +1,6 @@
-import Connection from "@/database/Connection";
+import { sql } from '@vercel/postgres';
+import { db } from '@vercel/postgres';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function (req: any, res:any){
     if (req.method === "GET"){
@@ -9,6 +11,14 @@ export default async function (req: any, res:any){
     };
 };
 const getTicket = async (req:any, res:any) =>{
-    const resultGet = await new Connection().Query(`SELECT * FROM ticket_preview`);
-    return res.status(200).json(resultGet);
+    const client = await db.connect();
+    try{
+        const result = await sql`SELECT * FROM ticket_preview;`;
+        return res.status(200).json(result.rows);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json({error: error});
+    }finally{
+        client.release();
+    }
 };

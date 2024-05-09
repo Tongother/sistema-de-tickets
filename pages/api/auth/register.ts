@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs"
-import Connection from "@/database/Connection";
+import { sql } from '@vercel/postgres';
+import { db } from '@vercel/postgres';
 
 export default async function registernHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
@@ -28,16 +29,9 @@ export default async function registernHandler(req: NextApiRequest, res: NextApi
 };
 
 const insertCliente = async (nombre: string, apellido: string, email: string, hashedPassword: string, res: NextApiResponse) => {
+    const client = await db.connect();
     try {
-        const connection = new Connection();
-        const query = `
-            EXEC sp_InsertarCliente
-            @nombre = '${nombre}',
-            @apellido = '${apellido}',
-            @email = '${email}',
-            @hashedPassword = '${hashedPassword}'
-        `;
-        const result = await connection.Query(query);
+        const result = await sql`SELECT insertar_cliente('${nombre}', '${apellido}', '${email}', '${hashedPassword}');`;
 
         // Verificar si el resultado es un array con al menos un elemento
         if (Array.isArray(result) && result.length > 0 && result[0].mensaje) {
@@ -48,5 +42,7 @@ const insertCliente = async (nombre: string, apellido: string, email: string, ha
     } catch (error) {
         console.error('Error al insertar cliente:', error);
         return { error: 'Error interno del servidor' }; // Devolver un objeto con el mensaje de error
+    }finally{
+        client.release();
     }
 };
