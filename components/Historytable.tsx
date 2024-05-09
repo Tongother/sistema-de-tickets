@@ -1,43 +1,50 @@
+'use client'
+import { useEffect, useState } from "react";
 import { fetchHistoryTable } from "@/app/lib/data";
 
-const HistoryTable = async() => {
-    const dataHistory = await fetchHistoryTable();
-    console.log(fetchHistoryTable);
+const HistoryTable = async () => {
+    const [dataHistory, setDataHistory] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const historyData = await fetchHistoryTable();
+            setDataHistory(historyData);
+        };
+
+        fetchData();
+    }, []);
     return (
         <>
-            <section className="">
-                <h1>Historial de tickets resueltos</h1>
-            </section>
             {dataHistory && (
-            <table className="table-auto">
-                <thead>
-                    <tr>
-                        <th className="min-w-[2em] text-center">ID_Ticket</th>
-                        <th className="min-w-[5em] max-w-[6em] text-center">Cliente</th>
-                        <th className="min-w-[5em] max-w-[6em] text-center">Problemática</th>
-                        <th className="min-w-[15em] max-w-[11em] text-center">Estatus</th>
-                        <th className="min-w-[15em] max-w-[11em] text-center">Fecha de apertura</th>
-                        <th className="min-w-[15em] max-w-[11em] text-center">Fecha de cierre</th>
-                        <th className="min-w-[5em] max-w-[6em] text-center">Solucionado por:</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {dataHistory.map((ticket:any) => (
-                    <tr key = {ticket.id_ticket}>
-                        <td className="border px-4 py-2">{ticket.id_ticket}</td>
-                        <td className="border px-4 py-2">{ticket.nombre_cliente}</td>
-                        <td className="border px-4 py-2">{ticket.categoria_problematica}</td>
-                        <td className="border px-4 py-2">{ticket.estatus}</td>
-                        <td className="border px-4 py-2">{ticket.fecha_reporte}</td>
-                        <td className="border px-4 py-2">{ticket.fecha_solucion}</td>
-                        <td className="border px-4 py-2">{ticket.nombre_asesor}</td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
-        )}
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-[#0E182C]">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">ID_Ticket</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Cliente</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Problemática</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Estatus</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Fecha de apertura</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Fecha de cierre</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Solucionado por:</th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-black">
+                        {dataHistory.map((ticket:any) => (
+                            <tr key={ticket.id_ticket}>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.id_ticket}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.nombre_cliente}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.categoria_problematica}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.estatus}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.fecha_reporte}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.fecha_solucion}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{ticket.nombre_asesor}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </>
     );
 }
+
 export default HistoryTable;
