@@ -32,7 +32,7 @@ main{
 .innerBox{
     position: absolute;
     width: calc(100% - 4.1rem);
-    height: calc(100% - 4.1rem);
+    height: calc(100% - 2.8rem);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -150,6 +150,7 @@ label{
     font-size: .75rem;
     top: -2px;
 }
+
 
 .sign-btn{
     display: inline-block;
@@ -280,4 +281,16 @@ main.sign-up-mode .carousel{
     width: 1.1rem;
     background-color: #272944;
     border-radius: 1rem;
+}
+
+.error-message {
+    position: absolute; /* Posición absoluta en relación con el input */
+    bottom: -28px; /* Posición en la parte inferior del input */
+    right: 30; /* Alineado a la derecha */
+    background-color: #E4E8F5; /* Color de fondo */
+    padding: 8px; /* Espaciado interno */
+    border-radius: 4px; /* Borde redondeado */
+    font-size: 12px; /* Tamaño de fuente */
+    color: #FF0000; /* Color de texto rojo */
+    z-index: 1; /* Asegúrate de que esté por encima del input */
 }

@@ -12,7 +12,14 @@ interface AdvisorLayoutProps {
 }
 
 export default function AdvisorLayout({ children }: AdvisorLayoutProps) {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState({
+    id: '',
+    nombre: '',
+    apellido: '',
+    email: '',
+    tipoUsuario: ''
+  });
+  
   useEffect(() => {
     const getProfile = async () => {
       try {

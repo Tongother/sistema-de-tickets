@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import '@/styles/style.css';
 import WindCodeHD from '@/public/WindCodeHD.png';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Image1 from '@/public/image1.png';
 import Image2 from '@/public/image2.png';
 import Image3 from '@/public/image3.png';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const obtenerMomentoDelDia = (): string => {
     const horaActual = new Date().getHours();
@@ -25,50 +26,98 @@ const obtenerMomentoDelDia = (): string => {
 
 export default function FormsRegister() {
     const momentoDelDia = obtenerMomentoDelDia();
-    const [inputActivo, setInputActivo] = useState({ nombre: false, apellido: false, email: false, password: false });
-    const [contenidoInput, setContenidoInput] = useState({ nombre: '', apellido: '', email: '', password: '' });
+    const formRef = useRef<HTMLFormElement>(null);
+    const formRefRegister = useRef<HTMLFormElement>(null);
+    const [inputActivo, setInputActivo] = useState({ nombre: false, apellido: false, email: false, password: false, confirmPassword: false, emailLogin: false, passwordLogin: false });
+    const [contenidoInput, setContenidoInput] = useState({ nombre: '', apellido: '', email: '', password: '', confirmPassword: '', emailLogin: '', passwordLogin: '' });
     const [cambiarForm, setCambiarForm] = useState(false);
     const [cambiarSlider, setCambiarSlider] = useState({ bullet1: true, bullet2: false, bullet3: false });
     const [cambiarImagenSlider, setCambiarImagenSlider] = useState({ imagen1: true, imagen2: false, imagen3: false });
-    const [credentials, setCredentials] = useState({email: '', password: ''});
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [loginError, setLoginError] = useState(false);
+    const [registerError, setRegisterError] = useState(false);
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     });
+    const [passwordError, setPasswordError] = useState(false);
+    const router = useRouter();
 
+    const registerHandleSubmit = async (event: any) => {
+        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
-    const registerHandleSubmit = async (event:any) => {
-        const nameRegex = /^[A-Za-z\s]+$/;
-        if (!nameRegex.test(formData.nombre) || !nameRegex.test(formData.apellido)) {
-            alert('El nombre y el apellido no deben contener números ni caracteres especiales');
-            return;
-        }
-        try {
-            const response = await axios.post('/api/auth/register', formData);
-            console.log(response.data);
-            alert('Usuario registrado exitosamente');
-            // Aquí puedes realizar alguna acción adicional después de enviar los datos
-        } catch (error) {
-            console.error('Error al registrar usuario:', error);
-            alert('Hubo un error al registrar el usuario');
+        // Restablecer el estado de error de contraseña
+        setPasswordError(false);
+
+        // Verificar si la contraseña y la confirmación de contraseña coinciden
+        if (formData.password !== formData.confirmPassword) {
+            setPasswordError(true); // Establecer el estado de error de contraseña en true
+        } else {
+            // Si las contraseñas coinciden, procede con el registro
+            try {
+                const response = await axios.post('/api/auth/register', formData);
+                console.log(response.data);
+                alert('Usuario registrado exitosamente');
+                // Aquí puedes realizar alguna acción adicional después de enviar los datos
+            } catch (error) {
+                setRegisterError(true);
+                setTimeout(() => {
+                    setRegisterError(false);
+                }, 6000);
+            } finally {
+                // Reiniciar el formulario si event.currentTarget está definido
+                setContenidoInput({ ...contenidoInput, nombre: '', apellido: '', email: '', password: '', confirmPassword: ''})
+                if (formRefRegister.current) {
+                    formRefRegister.current.reset();
+                }
+            }
         }
     };
 
-    const registerHandleChange = (event:any) => {
+    const registerHandleChange = (event: any) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    const loginHandleSubmit = async (event:any) => {
+    const loginHandlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(credentials);
-        const response = await axios.post('/api/auth/login', credentials);
-        console.log(response);
+        try {
+            const response = await axios.post('/api/auth/login', credentials, {
+                withCredentials: true
+            });
+            const { tipoUsuario } = response.data;
+            switch (tipoUsuario) {
+                case 'Cliente':
+                    window.location.href = '/cliente';
+                    break;
+                case 'Asesor':
+                    window.location.href = '/advisor';
+                    break;
+                case 'Admin':
+                    window.location.href = '/dashboard';
+                    break;
+                default:
+                    window.location.href = '/';
+                    break;
+            }
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+            setLoginError(true);
+            setTimeout(() => {
+                setLoginError(false);
+            }, 2500);
+        } finally {
+            // Reiniciar el formulario si event.currentTarget está definido
+            setContenidoInput({ ...contenidoInput, emailLogin: '', passwordLogin: '' })
+            if (formRef.current) {
+                formRef.current.reset();
+            }
+        }
     };
-
     const loginHandleChange = (event: any) => {
-        setCredentials({...credentials, [event.target.name]: event.target.value});
+        setCredentials({ ...credentials, [event.target.name]: event.target.value });
     };
 
     const manejarImagen = (imagenName: string) => {
@@ -111,12 +160,24 @@ export default function FormsRegister() {
 
     return (
         <main className={`bg-cover bg-center ${cambiarForm ? 'sign-up-mode' : ''}`} style={{ backgroundImage: `url(${FondoLogin.src})` }}>
+            {registerError && (
+                <div className="z-50 absolute top-0 left-0 mt-4 ml-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                    <strong className="font-bold">¡Parece que llegas tarde! </strong>
+                    <span className="block sm:inline">Ya existe una cuenta registrada con este correo.</span>
+                </div>
+            )}
+            {loginError && (
+                    <div className="z-50 absolute top-0 left-0 mt-4 ml-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                        <strong className="font-bold">¡Algo salió mal! </strong>
+                        <span className="block sm:inline">Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.</span>
+                    </div>
+                )}
             <section className="box">
                 <div className="innerBox">
                     <article className="forms-wrap">
-                        <form className="sign-in-form" onSubmit={(event) => {loginHandleSubmit(event);}}>
+                        <form ref={formRef} className="sign-in-form" onSubmit={(event) => { loginHandlerSubmit(event); }}>
                             <div className="logo">
-                                <img src={WindCodeHD.src} alt="WindCode" width={120} height={120} />
+                                <Image src={`${WindCodeHD.src}`} alt="WindCode" width={120} height={120} />
                             </div>
 
                             <div className="heading">
@@ -129,15 +190,15 @@ export default function FormsRegister() {
                                 <div className="input-wrap">
                                     <input
                                         type="email"
-                                        className={`input-field ${inputActivo.email || contenidoInput.email ? 'active' : ''}`}
+                                        className={`input-field ${inputActivo.emailLogin || contenidoInput.emailLogin ? 'active' : ''}`}
                                         autoComplete="off"
                                         name="email"
                                         required
-                                        onFocus={() => manejarFocus('email')}
-                                        onBlur={() => manejarBlur('email')}
+                                        onFocus={() => manejarFocus('emailLogin')}
+                                        onBlur={() => manejarBlur('emailLogin')}
                                         onChange={(event) => {
-                                            manejarCambio(event, 'email');
-                                            loginHandleChange(event); 
+                                            manejarCambio(event, 'emailLogin');
+                                            loginHandleChange(event);
                                         }}
                                     />
                                     <label>Correo</label>
@@ -147,15 +208,15 @@ export default function FormsRegister() {
                                     <input
                                         type="password"
                                         minLength={8}
-                                        className={`input-field ${inputActivo.password || contenidoInput.password ? 'active' : ''}`}
+                                        className={`input-field ${inputActivo.passwordLogin || contenidoInput.passwordLogin ? 'active' : ''}`}
                                         autoComplete="off"
                                         name="password"
                                         required
-                                        onFocus={() => manejarFocus('password')}
-                                        onBlur={() => manejarBlur('password')}
+                                        onFocus={() => manejarFocus('passwordLogin')}
+                                        onBlur={() => manejarBlur('passwordLogin')}
                                         onChange={(event) => {
-                                            manejarCambio(event, 'password');
-                                            loginHandleChange(event); 
+                                            manejarCambio(event, 'passwordLogin');
+                                            loginHandleChange(event);
                                         }}
                                     />
                                     <label>Contraseña</label>
@@ -168,7 +229,7 @@ export default function FormsRegister() {
                             </div>
                         </form>
 
-                        <form className="sign-up-form" onSubmit={(event) => {registerHandleSubmit(event);}}>
+                        <form ref={formRefRegister} className="sign-up-form" onSubmit={(event) => { registerHandleSubmit(event); }}>
                             <div className="logo">
                                 <Image src={`${WindCodeHD.src}`} alt="WindCode" width={120} height={120} />
                             </div>
@@ -191,7 +252,7 @@ export default function FormsRegister() {
                                         onBlur={() => manejarBlur('nombre')}
                                         onChange={(event) => {
                                             manejarCambio(event, 'nombre');
-                                            registerHandleChange(event); 
+                                            registerHandleChange(event);
                                         }}
                                     />
                                     <label>Nombre</label>
@@ -207,7 +268,7 @@ export default function FormsRegister() {
                                         onBlur={() => manejarBlur('apellido')}
                                         onChange={(event) => {
                                             manejarCambio(event, 'apellido');
-                                            registerHandleChange(event); 
+                                            registerHandleChange(event);
                                         }}
                                     />
                                     <label>Apellidos</label>
@@ -221,14 +282,13 @@ export default function FormsRegister() {
                                         required
                                         onFocus={() => manejarFocus('email')}
                                         onBlur={() => manejarBlur('email')}
-                                        onChange={(event) => { 
+                                        onChange={(event) => {
                                             manejarCambio(event, 'email');
                                             registerHandleChange(event);
                                         }}
                                     />
                                     <label>Correo</label>
                                 </div>
-
 
                                 <div className="input-wrap">
                                     <input
@@ -243,34 +303,53 @@ export default function FormsRegister() {
                                         onChange={(event) => {
                                             manejarCambio(event, 'password');
                                             registerHandleChange(event);
+
+                                            if (formData.confirmPassword !== '' && formData.confirmPassword !== event.target.value) {
+                                                setPasswordError(true);
+                                            } else {
+                                                setPasswordError(false);
+                                            }
                                         }}
                                     />
                                     <label>Contraseña</label>
                                 </div>
+
                                 <div className="input-wrap">
                                     <input
                                         type="password"
                                         minLength={8}
-                                        className={`input-field ${inputActivo.password || contenidoInput.password ? 'active' : ''}`}
+                                        className={`input-field ${inputActivo.confirmPassword || contenidoInput.confirmPassword ? 'active' : ''}`}
                                         autoComplete="off"
                                         name="confirmPassword"
                                         required
-                                        onFocus={() => manejarFocus('password')}
-                                        onBlur={() => manejarBlur('password')}
+                                        onFocus={() => manejarFocus('confirmPassword')}
+                                        onBlur={() => manejarBlur('confirmPassword')}
                                         onChange={(event) => {
-                                            manejarCambio(event, 'password');
+                                            manejarCambio(event, 'confirmPassword');
                                             registerHandleChange(event);
+                                            // Verificar si las contraseñas no coinciden mientras el usuario escribe
+                                            if (formData.password !== '' && formData.password !== event.target.value) {
+                                                setPasswordError(true);
+                                            } else {
+                                                setPasswordError(false);
+                                            }
                                         }}
                                     />
-                                    <label>Confirm password</label>
+                                    <label>Confirmar contraseña</label>
+                                    {passwordError && (
+                                        <div className="error-message">
+                                            <span className="font-medium">¡Error!</span> Las contraseñas no coinciden.
+                                        </div>
+                                    )}
                                 </div>
-                                
+
 
                                 <input type="submit" value="Registrarse" className="sign-btn" />
 
                                 <p className="text">Al registrarse acepta los <a href="#">Terminos y condiciones</a> </p>
 
                             </div>
+
                         </form>
                     </article>
                     <article className="carousel">
