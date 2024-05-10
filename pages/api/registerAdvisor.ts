@@ -9,6 +9,8 @@ export default async function registernHandler(req: NextApiRequest, res: NextApi
         
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const client = await db.connect();
+
         try {
             // Insertar datos en la base de datos
             const result = await insertCliente(nombre, apellido, email, hashedPassword, res);
@@ -22,6 +24,8 @@ export default async function registernHandler(req: NextApiRequest, res: NextApi
         } catch (error) {
             console.error('Error al insertar datos en la base de datos:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
+        }finally{
+            client.release();
         }
     } else {
         res.status(400).json({ error: 'Método no permitido' });
@@ -29,13 +33,9 @@ export default async function registernHandler(req: NextApiRequest, res: NextApi
 };
 
 const insertCliente = async (nombre: string, apellido: string, email: string, hashedPassword: string, res: NextApiResponse) => {
-    const client = await db.connect();
     try {
-        const result = await sql`DO $$
-        BEGIN
-            PERFORM insertar_asesor('${nombre}', '${apellido}', '${email}', '${hashedPassword}');
-        END $$;
-        `;
+        const result = await sql`SELECT * FROM insertar_asesor(${nombre}, ${apellido}, ${email}, ${hashedPassword})`;
+        console.log(result);
 
         // Verificar si el resultado es un array con al menos un elemento
         if (Array.isArray(result) && result.length > 0 && result[0].mensaje) {
@@ -46,7 +46,5 @@ const insertCliente = async (nombre: string, apellido: string, email: string, ha
     } catch(error){
         console.log(error)
         return res.status(500).json({error: error});
-    }finally{
-        client.release();
     }
 };

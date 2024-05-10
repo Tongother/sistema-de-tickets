@@ -99,7 +99,6 @@ export default function FormsRegister() {
                     window.location.href = '/dashboard';
                     break;
                 default:
-                    window.location.href = '/';
                     break;
             }
         } catch (error) {
