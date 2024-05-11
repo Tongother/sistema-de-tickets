@@ -30,7 +30,7 @@ export default function ClientLayout({ children }: DashboardLayoutProps) {
     },[]);
     const dashboardInfo = [
         { name: 'Reportar problemas', src: alert.src, redirect:'/cliente'},
-        { name: 'Estatus de atención', src: lista.src, redirect: '/cliente' },
+        { name: 'Estatus de atención', src: lista.src, redirect: '/cliente/reporteTickets/x'},
     ];
     const headerInfo = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: avatar.src, }
 

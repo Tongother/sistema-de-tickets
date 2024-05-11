@@ -14,7 +14,6 @@ export default async function GET(
   } catch (error) {
     return res.status(500).json({ error });
   }
- 
   const pets = await sql`SELECT * FROM Pets;`;
   return res.status(200).json({ pets: pets.rows });
 }
