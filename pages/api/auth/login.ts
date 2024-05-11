@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
-import Connection from "@/database/Connection";
+import { sql } from '@vercel/postgres';
+import { db } from '@vercel/postgres';
 import jwt from 'jsonwebtoken';
 import { serialize } from "cookie";
 const superTokenSecretKey = process.env.JWT_SECRET_KEY;
@@ -8,9 +9,10 @@ const superTokenSecretKey = process.env.JWT_SECRET_KEY;
 export default async function loginHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         const { email, password} = req.body;
+        const client = await db.connect();
         try {
-            const userData = await new Connection().Query(`SELECT * FROM usuarios WHERE correo = '${email}'`) as any;
-            const data = await userData[0];
+            const userData = await sql`SELECT * FROM clientes WHERE correo = ${email}`;
+            const data = userData.rows[0];
             if (!data.correo || !(await bcrypt.compare(password, data.password))) {
                 return res.status(401).json({ error: 'Credenciales inválidas' });
             }
@@ -36,6 +38,8 @@ export default async function loginHandler(req: NextApiRequest, res: NextApiResp
         } catch (error) {
             console.error('Error en el proceso de inicio de sesión:', error);
             return res.status(500).json({ error: 'Error interno del servidor' });
+        }finally{
+            client.release();
         }
     } else {
         return res.status(400).json({ error: 'Método no permitido' });

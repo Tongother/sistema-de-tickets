@@ -11,8 +11,7 @@ const UsersTable = () => {
     const fetchData = async () => {
       try{
         const data = await fetchUsersTable();
-        setDataUsers(data.pets);
-        console.log(data.pets)
+        setDataUsers(data);
       }catch(error){
         console.error('Error al obtener los datos de la tabla de usuarios:', error);
       }
@@ -20,7 +19,6 @@ const UsersTable = () => {
 
     fetchData();
   }, []);
-
 
   return (
    <>
@@ -35,9 +33,9 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {dataUsers.map((user:any, index:number) => (
+          {dataUsers.map((user:any, index:any) => (
             <tr className="flex justify-around mb-[15px]" key={index}>
-              <td className="min-w-[2em] text-center">{user.name}</td>
+              <td className="min-w-[2em] text-center">{user.id_cliente}</td>
               <td className="min-w-[5em] max-w-[6em] text-center">{user.nombre}</td>
               <td className="min-w-[5em] max-w-[6em] text-center">{user.apellido}</td>
               <td className="min-w-[15em] max-w-[11em] text-center">{user.correo}</td>
