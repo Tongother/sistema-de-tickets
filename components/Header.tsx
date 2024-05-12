@@ -6,10 +6,9 @@ import WindCodeHD from "/public/WindCodeHD.png"
 
 interface HeaderProps {
     children: React.ReactNode;
-    headerInfo: { name: string; email: string; rol: string; src: string };
 }
 
-export default function Header({children, headerInfo}:HeaderProps){
+export default function Header({children}:HeaderProps){
     return(
         <div className="bg-[#FFFF] w-full flex flex-col place-content-start justify-center h-full">
             <article className="w-full h-[110px] flex flex-row border-b-2 border-slate-200">

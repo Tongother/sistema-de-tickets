@@ -30,9 +30,9 @@ export default function ClientLayout({ children }: DashboardLayoutProps) {
     },[]);
     const dashboardInfo = [
         { name: 'Reportar problemas', src: alert.src, redirect:'/cliente'},
-        { name: 'Estatus de atención', src: lista.src, redirect: '/cliente/reporteTickets/x'},
+        { name: 'Estatus de atención', src: lista.src, redirect: '/cliente/atencion'},
     ];
-    const headerInfo = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: avatar.src, }
+    const dashboardUser = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: avatar.src, };
 
     type UserData = {
         id:number;
@@ -43,10 +43,10 @@ export default function ClientLayout({ children }: DashboardLayoutProps) {
     return(
     <main className='h-screen w-screen flex'>
         <section className="w-[300px] flex items-end justify-end">
-            <Dashboard dashboardInfo={dashboardInfo} title='Cliente'/>
+            <Dashboard dashboardUser= {dashboardUser} dashboardInfo={dashboardInfo} title='Cliente'/>
         </section>
         <section className="w-[1235px] flex flex-col">
-            <Header headerInfo={headerInfo}> {children} </Header>
+            <Header> {children} </Header>
         </section>
     </main>
     );

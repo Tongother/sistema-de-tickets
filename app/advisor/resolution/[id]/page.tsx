@@ -1,6 +1,6 @@
 import Resolution from "@/components/Resolution";
 // Función para cargar un ticket específico
-async function loadTicket(id:number){
+async function loadTicket(id:string){
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${id}`);
     const data = await res.json();
     console.log(data);

@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { sql } from '@vercel/postgres';
 import { db } from '@vercel/postgres';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function (req: NextApiRequest, res:NextApiResponse){
     if (req.method === "GET"){
@@ -9,14 +9,14 @@ export default async function (req: NextApiRequest, res:NextApiResponse){
     else {
         return res.status(400).json({error:"El método no existe"});
     };
-
 };
-const getTicket = async (req: NextApiRequest, res: NextApiResponse) =>{
+const getTicket = async (req:NextApiRequest, res:NextApiResponse) =>{
     const client = await db.connect();
     try{
         const {id}  = req.query as any;
-        const resultGet = await sql`SELECT * FROM tickets WHERE id_ticket = ${id}`;
-        return res.status(200).json(resultGet);
+        console.log(id);
+        const resultGet = await sql`SELECT * FROM ticket_preview WHERE id_cliente_reportado = ${id}`;
+        return res.status(200).json(resultGet.rows);
     }catch(error){
         console.log(error)
         return res.status(500).json({error: error});

@@ -11,7 +11,7 @@ export default async function loginHandler(req: NextApiRequest, res: NextApiResp
         const { email, password} = req.body;
         const client = await db.connect();
         try {
-            const userData = await sql`SELECT * FROM clientes WHERE correo = ${email}`;
+            const userData = await sql`SELECT * FROM usuarios WHERE correo = ${email}`;
             const data = userData.rows[0];
             if (!data.correo || !(await bcrypt.compare(password, data.password))) {
                 return res.status(401).json({ error: 'Credenciales inválidas' });

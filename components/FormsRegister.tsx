@@ -35,6 +35,7 @@ export default function FormsRegister() {
     const [cambiarImagenSlider, setCambiarImagenSlider] = useState({ imagen1: true, imagen2: false, imagen3: false });
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [loginError, setLoginError] = useState(false);
+    const [registerSucces, setRegisterSucces] = useState(false);
     const [registerError, setRegisterError] = useState(false);
     const [formData, setFormData] = useState({
         nombre: '',
@@ -44,7 +45,6 @@ export default function FormsRegister() {
         confirmPassword: ''
     });
     const [passwordError, setPasswordError] = useState(false);
-    const router = useRouter();
 
     const registerHandleSubmit = async (event: any) => {
         event.preventDefault(); // Evitar que el formulario se envíe automáticamente
@@ -60,8 +60,11 @@ export default function FormsRegister() {
             try {
                 const response = await axios.post('/api/auth/register', formData);
                 console.log(response.data);
-                alert('Usuario registrado exitosamente');
-                // Aquí puedes realizar alguna acción adicional después de enviar los datos
+                setRegisterSucces(true);
+                setTimeout(() => {
+                    setRegisterSucces(false);
+                }, 6000);
+                setCambiarForm(!cambiarForm);
             } catch (error) {
                 setRegisterError(true);
                 setTimeout(() => {
@@ -172,6 +175,19 @@ export default function FormsRegister() {
                         <span className="block sm:inline">Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.</span>
                     </div>
                 )}
+            {registerSucces && (
+                <div role="alert" className="z-50 absolute top-0 left-0 flex w-[550px] px-4 py-4 text-base text-white bg-gray-900 rounded-lg font-regular">
+                <div className="shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" className="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z">
+                    </path>
+                  </svg>
+                </div>
+                <div className="ml-3 mr-12">Registro realizado con éxito, ahora por favor inicia sesión.</div>
+              </div>
+            )}
             <section className="box">
                 <div className="innerBox">
                     <article className="forms-wrap">

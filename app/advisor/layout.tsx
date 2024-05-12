@@ -39,16 +39,15 @@ export default function AdvisorLayout({ children }: AdvisorLayoutProps) {
     { name: 'Tickets', src: ticket.src, redirect: "/advisor" },
     { name: 'Historial de tickets', src: historial.src, redirect: "/advisor/history" },
   ];
-
-  const headerInfo = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: tecnico.src, }
+  const dashboardUser = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: tecnico.src, };
 
   return(
     <main className='h-screen w-screen flex '>
         <section className="w-[300px] flex items-end justify-end">
-            <Dashboard dashboardInfo={dashboardInfo} title='Cliente'/>
+            <Dashboard dashboardUser={dashboardUser} dashboardInfo={dashboardInfo} title='Cliente'/>
         </section>
         <section className="w-[1235px] flex flex-col">
-            <Header headerInfo={headerInfo}> {children} </Header>
+            <Header> {children} </Header>
         </section>
     </main>
     );
