@@ -1,13 +1,13 @@
 "use client"
 import React from 'react'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import ProgressBar from '@/components/ProgressBar';
 
 const GetTicket = (params: any) => {
   return(
     
-      <div className='flex flex-col h-full w-full justify-center items-center'> 
-        Hola reporte Ticket
+      <div className='h-full w-full'> 
+        <ProgressBar></ProgressBar>
       </div>
   )
 }

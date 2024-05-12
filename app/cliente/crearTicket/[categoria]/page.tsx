@@ -4,17 +4,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const FormCategoria = (params: any) => {
-  
-  async function loadCatego(catego:any) {
-  }
-  
-  // const res = await fetch(`http://www.windcodeinc.me/api/tickets/${categO}`)
-
-  async function getCatego(params:any) {
+  async function getCategoria(params:any) {
     console.log('Hola Params: ',params);
     const objetoParams= params;
-    const catego= await loadCatego(objetoParams.params.categoriaProblematica);
+    const categoria = objetoParams.categoria;
   }
+  
   const [postData,setPostData] = useState({idCliente: '',categoriaProblematica: '',descripcionProblematica: ''});
   //useState es un método de react que sirve para 
   const [userData,setUserData] = useState({id: 0, nombre: '',apellido: '', email: '',tipoUsuario: '',});
@@ -38,7 +33,6 @@ const FormCategoria = (params: any) => {
     console.log(response);
   };
   return(
-    
       <div className='flex flex-col h-full w-full bg-white justify-center items-center'> 
         <form onSubmit={(event) => {loginHandleSubmit(event);}} className='shadow-lg h-[500px] w-[650px] p-7 flex flex-col first-letter:border rounded-[30px]'>
             <h1 className=' text-3xl text-center my-7 mt-4 text-gray-700'>Sistema de Tickets</h1>
