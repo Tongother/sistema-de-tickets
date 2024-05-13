@@ -235,10 +235,10 @@ const TicketCliente = () => {
                                             Califíca la atención recibida
                                         </button>
                                     )}
-
                                 </div>
                             </div>
                         </div>
+    
                     ))}
                 </div>
             )}
