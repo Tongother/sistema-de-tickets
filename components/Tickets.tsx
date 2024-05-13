@@ -45,7 +45,7 @@ const Tickets = () => {
     };
 
     return (
-        <div className="h-[558px] w-full px-5">
+        <div className="h-[558px] w-full px-5 overflow-auto">
             {data && data.length > 0 && (
                 <div className="h-full w-full grid grid-cols-4 grid-rows-3">
                     {data.map((tickets, id_ticket) => (
