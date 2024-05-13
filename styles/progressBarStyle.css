@@ -1,21 +1,16 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-@font-face {
-    font-family: pop;
-    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-}
-
 .main{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: pop;
+    font-family: poppins;
     flex-direction: column;
 }
 .head{
@@ -27,17 +22,20 @@
     color: #333;
 }
 .head_1 span{
-    color: #ff4732;
+    color: #3A4268;
 }
 .head_2{
     font-size: 16px;
     font-weight: 600;
     color: #333;
     margin-top: 3px;
+    margin-bottom: 40px;
 }
 ul{
-    display: flex;
-    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 155px));
+    grid-template-rows: auto, 300px;
+
 }
 ul li{
     list-style: none;
@@ -47,17 +45,43 @@ ul li{
 }
 ul li .icon{
     font-size: 35px;
-    color: #ff4732;
+    color: #3A4268;
     margin: 0 60px;
 }
 ul li .text{
-    font-size: 14px;
+    font-size: 15px;
+    text-align: center;
     font-weight: 600;
-    color: #ff4732;
+    color: #3A4268;
 }
 
-/* Progress Div Css  */
+/* Progress Div1 Css  */
+ul li .progress1{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(68, 68, 68, 0.781);
+    margin: 14px 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    position: relative;
+    cursor: pointer;
+}
+.one::after{
+    width: 0;
+    height: 0;
+}
+ul li .progress1 .uil{
+    display: none;
+}
+ul li .progress1 p{
+    font-size: 13px;
+}
 
+
+
+/* Progress Div Css  */
 ul li .progress{
     width: 30px;
     height: 30px;
@@ -92,12 +116,12 @@ ul li .progress p{
 /* Active Css  */
 
 ul li .active{
-    background-color: #ff4732;
+    background-color: #3A4268;
     display: grid;
     place-items: center;
 }
 li .active::after{
-    background-color: #ff4732;
+    background-color: #3A4268;
 }
 ul li .active p{
     display: none;
