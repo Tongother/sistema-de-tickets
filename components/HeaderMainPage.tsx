@@ -85,7 +85,7 @@ useMotionValueEvent(scrollY, "change", (latest) => {
         <div className="p-[2em] w-[16em]">
           <ul className="flex justify-between">
           <motion.li variants={arrayTextMotion[3]} initial="rest" animate="visible" whileHover="hover" className="text-xl">
-              <FlyoutLink href="/login" FlyoutColor="bg-black" FlyoutColorText="hover:text-black">
+              <FlyoutLink href="/dashboard" FlyoutColor="bg-black" FlyoutColorText="hover:text-black">
                 Soporte
               </FlyoutLink>
             </motion.li>
