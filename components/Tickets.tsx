@@ -43,10 +43,9 @@ const Tickets = () => {
     }
     
     return (
-        
         <>
         {data && data.length > 0 && (
-            <div className="grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
+            <div className="h-full w-grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
                 {data.map((tickets, index) => (
                     <div key={index}>
                         <Link href={`/advisor/resolution/${tickets.id}`}>

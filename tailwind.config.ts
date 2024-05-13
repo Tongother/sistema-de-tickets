@@ -17,6 +17,7 @@ const config: Config = {
         outfit: ["Outfit", "sans-serif"],
         sans: ['Open Sans', 'sans-serif'],
         tilt: ['Tilt Warp', 'sans-serif'],
+        pop: ['Poppins', 'sans-serif'],
       },
       keyframes: {
         carrousel: {

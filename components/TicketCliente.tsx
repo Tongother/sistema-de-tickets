@@ -207,13 +207,15 @@ const TicketCliente = () => {
                     </div>
                 </div>
             )}
+
             {data && data.length >= 0 && (
-                <div className="grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
+                <div className="h-full w-full grid grid-cols-3 grid-rows-[200px] justify-center items-center">
                     {data.map((tickets, index) => (
-                        <div key={index}>
-                            <div className="flex flex-wrap justify-center">
-                                <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
-                                    <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
+                        <div key={index} className=" h-full w-full flex items-center justify-center">
+                            <div className="flex flex-wrap justify-center h-[150px] w-[300px] bg-white shadow-md rounded-md font-pop">
+                                <div className="bg-[#3A4268] w-full h-[10%] rounded-t-md"></div>
+                                <div className="w-full h-full p-5 pt-2">
+                                    <h3 className="text-md font-semibold">Categoría: {tickets.categoria_problematica}</h3>
                                     <p className="text-sm">Estatus: {tickets.estatus}</p>
                                     {tickets.nombre_asesor !== null && (
                                         <p className="text-sm">Asesor asignado: {tickets.nombre_asesor}</p>
@@ -226,7 +228,6 @@ const TicketCliente = () => {
                                     )}
                                 </div>
                             </div>
-
                         </div>
                     ))}
                 </div>
