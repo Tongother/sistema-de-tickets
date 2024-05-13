@@ -4,7 +4,7 @@ import Link from "next/link";
 import ticket from "@/pages/api/ticket";
 
 const Tickets = () => {
-    const [data, setData] = useState<{id: number; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number;}[]>([]);
+    const [data, setData] = useState<{id_ticket: number; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number;}[]>([]);
     useEffect (() => {
         const getData = async () => {
             try{
@@ -51,7 +51,7 @@ const Tickets = () => {
             <div className="grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
                 {data.map((tickets, index) => (
                     <div key={index}>
-                        <Link href={`/advisor/resolution/${tickets.id}`}>
+                        <Link href={`/advisor/resolution/${tickets.id_ticket}`}>
                             <div className="flex flex-wrap justify-center">
                                 <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
                                     <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>

@@ -9,7 +9,7 @@ async function loadTicket(id:string){
 
 
 // Componente para la página de resolución de tickets
-async function TicketResolution(params: any) {
+export default async function TicketResolution(params: any) {
     const obj = params; 
     const tickets = await loadTicket(obj.params.id);
     const ticket = tickets[0];
@@ -27,5 +27,3 @@ async function TicketResolution(params: any) {
         </section>
     );
 }
-
-export default TicketResolution;
