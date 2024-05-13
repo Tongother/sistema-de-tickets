@@ -7,7 +7,6 @@ async function loadTicket(id:string){
     return data;
 }
 
-
 // Componente para la página de resolución de tickets
 export default async function TicketResolution(params: any) {
     const obj = params; 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import axios from "axios";
 import ClienteIcon from '@/public/ClienteIcon.png';
 import exit from '@/public/exit.png';
+import { FlyoutLink } from "./FlyoutLink";
 
 interface DashboardProps {
     dashboardUser: {name: string, email: string, rol: string, src: string};
@@ -34,11 +35,11 @@ export default function Dashboard({dashboardUser, dashboardInfo, title}:Dashboar
             </div>
             <section className="h-full w-full text-white font-outfit flex flex-col mt-7">
                 {dashboardInfo.map((info, index) => (
-                    <Link href={info.redirect} key={index}>
-                        <article className="flex items-center mt-3 w-[275px] p-[15px] pl-[20px] cursor-pointer border-none rounded-r-[12px] text-slate-500  hover:bg-[#1F283D] hover:text-white">
+                    <FlyoutLink href={info.redirect} key={index} FlyoutColor="bg-white" FlyoutColorText="hover:bg-[#1F283D]">
+                        <article className="flex items-center w-[275px] p-[15px] pl-[20px] cursor-pointer border-none rounded-r-[12px] text-slate-400 hover:text-white">
                             <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
                         </article>
-                    </Link>
+                    </FlyoutLink>
                 ))}
             </section>
             <button className=" ml-3 mb-3 w-[100px] h-[60px] text-[#6F7686] font-outfit  rounded-md font-medium flex flex-row items-center hover:text-white hover:bg-slate-700" onClick={logout}>
