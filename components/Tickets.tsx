@@ -45,25 +45,25 @@ const Tickets = () => {
     };
 
     return (
-        <>
-        {data && data.length > 0 && (
-            <div className="h-full w-grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
-                {data.map((tickets, index) => (
-                    <div key={index}>
-                        <Link href={`/advisor/resolution/${tickets.id_ticket}`}>
-                            <div className="flex flex-wrap justify-center">
-                                <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
-                                    <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
-                                    <p className="text-sm">Estatus: {tickets.estatus}</p>
-                                    <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
-                                </div>
+        <div className="h-[558px] w-full px-5">
+            {data && data.length > 0 && (
+                <div className="h-full w-full grid grid-cols-4 grid-rows-3">
+                    {data.map((tickets, id_ticket) => (
+                        <div key={id_ticket} className=" h-full w-full flex items-center justify-center ">
+                            <div>
+                                <Link href={`/advisor/resolution/${tickets.id_ticket}`}>
+                                    <div className="bg-gray-200 p-4 rounded-lg w-64">
+                                        <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
+                                        <p className="text-sm">Estatus: {tickets.estatus}</p>
+                                        <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
-                    </div>
-                ))}
-            </div>
-            )}
-        </>
+                        </div>
+                    ))}
+                </div>
+                )}
+        </div>
     );
 }
 export default Tickets;

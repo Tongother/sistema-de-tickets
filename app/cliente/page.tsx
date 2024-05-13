@@ -15,7 +15,7 @@ export default function cliente(){
                 <Products product="Problema de red" iconSrc={`${netw.src}`}/>
                 <Products product="Tiempos de respuesta lentos" iconSrc={`${clock.src}`}/>
                 <Products product="Detalles de mi cuenta" iconSrc={`${profile.src}`}/>
-                <Products product="Encontré un bug" iconSrc={`${bug.src}`}/>
+                <Products product="Encontre un bug" iconSrc={`${bug.src}`}/>
                 <Products product="Fallo de servidor" iconSrc={`${server.src}`}/>
             </div>
         </section>
