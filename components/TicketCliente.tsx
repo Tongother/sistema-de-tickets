@@ -8,7 +8,7 @@ import EstrellaAmarillaAnimada from '@/public/estrella_animada.gif'
 import axios from "axios";
 
 const TicketCliente = () => {
-    const [data, setData] = useState<{ id_cliente_reportado: number; id_asesor_asignado: number; nombre_asesor: any; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: any; }[]>([]);
+    const [data, setData] = useState<{ id_ticket: number; id_cliente_reportado: number; id_asesor_asignado: number; nombre_asesor: any; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number; calificado: boolean;}[]>([]);
     const [userData, setUserData] = useState({ id: 0, nombre: '', apellido: '', email: '', tipoUsuario: '', });
     const [calificarActivo, setCalificarActivo] = useState(false);
     const rate1Ref = useRef<HTMLInputElement>(null);
@@ -16,12 +16,12 @@ const TicketCliente = () => {
     const rate3Ref = useRef<HTMLInputElement>(null);
     const rate4Ref = useRef<HTMLInputElement>(null);
     const rate5Ref = useRef<HTMLInputElement>(null);
-    const [cambiarEstrella, setCambiarEstrella] = useState({ star1: EstrellaGris.src, star2: EstrellaGris.src, star3: EstrellaGris.src, star4: EstrellaGris.src, star5: EstrellaGris.src })
+    const [cambiarEstrella, setCambiarEstrella] = useState({ star1: EstrellaGris.src, star2: EstrellaGris.src, star3: EstrellaGris.src, star4: EstrellaGris.src, star5: EstrellaGris.src });
     const [animacionEstrella, setAnimacionEstrella] = useState(false);
     const [calificacion, setCalificacion] = useState(0);
     const [encuestasRealizadas, setEncuestasRealizadas] = useState<{ [key: number]: boolean }>({});
     const [idAsesorAsignado, setIdAsesorAsignado] = useState({id_asesor_asignado: 0});
-    const [idEncuesta, setIdEncuesta] = useState(0);
+    const [idTicket, setIdTicket] = useState({id_ticket: 0});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,9 +60,9 @@ const TicketCliente = () => {
     }, [userData]); // Ejecutar cada vez que userData.id sea diferente de 0
 
 
-    const establecerDatos = (index: any, id_asesor_Asignado:any) =>{
+    const establecerDatos = (id_ticket: any, id_asesor_Asignado:any) =>{
         setIdAsesorAsignado(id_asesor_Asignado);
-        setIdEncuesta(index);
+        setIdTicket({id_ticket: id_ticket});
     };
     const handleStarClick = (ref: React.RefObject<HTMLInputElement>) => {
         setAnimacionEstrella(true);
@@ -77,7 +77,6 @@ const TicketCliente = () => {
                 newStars[`star${j + 1}`] = EstrellaGris.src;
             }
         }
-
         setCambiarEstrella(newStars as any);
 
         setTimeout(() => {
@@ -134,18 +133,28 @@ const TicketCliente = () => {
             const response = await axios.post('/api/calificaciones', encuestaData);
         }
         catch{
-            console.log({error: 'error al enviar la encuesta'})
+            console.log({error: 'error al enviar la encuesta'});
         }
         finally{
             setCalificarActivo(!calificarActivo);
         }
-    }
+    };
 
     const handleEncuestaRealizada = (idTicket: number) => {
         setEncuestasRealizadas(prevState => ({
             ...prevState,
             [idTicket]: true // Marcar la encuesta como realizada para el ticket con el ID correspondiente
         }));
+    };
+
+    const postCalificacion = async () => {
+        try{
+            const query = await axios.post('/api/encuesta', idTicket);
+        }catch(error: any){
+            console.log({error: 'No sirve ptm' });
+        }
+        
+        window.location.href = '/cliente/atencion';
     };
     
 
@@ -166,7 +175,7 @@ const TicketCliente = () => {
         if (horas > 24) {
             return dias + " días";
         }
-    }
+    };
 
     return (
         <>
@@ -202,7 +211,7 @@ const TicketCliente = () => {
                             </label>
                         </div>
                         <p className="text-sm mt-5">¡Tu opinión es importante para nosotros!</p>
-                        <button onClick={() => {enviarEncuesta(); handleEncuestaRealizada(idEncuesta)}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-2">Enviar encuesta</button>
+                        <button onClick={() => {enviarEncuesta(); handleEncuestaRealizada(idTicket.id_ticket); postCalificacion()}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-2">Enviar encuesta</button>
                         <button onClick={() => setCalificarActivo(false)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Cerrar</button>
                     </div>
                 </div>
@@ -219,11 +228,12 @@ const TicketCliente = () => {
                                         <p className="text-sm">Asesor asignado: {tickets.nombre_asesor}</p>
                                     )}
                                     <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
-                                    {tickets.estatus === 'Pendiente' && !encuestasRealizadas[index] &&(
-                                        <button name={`encuesta${index}`} className=" text-[12px] bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-2" onClick={() => {calificarHandleChange(); establecerDatos(index, tickets.id_asesor_asignado)}}>
+                                    {tickets.estatus === 'Solucionado' && encuestasRealizadas[index] !== true && tickets.calificado !== true &&(
+                                        <button name={`encuesta${index}`} className=" text-[12px] bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-2" onClick={() => {calificarHandleChange(); establecerDatos(tickets.id_ticket, tickets.id_asesor_asignado)}}>
                                             Califíca la atención recibida
                                         </button>
                                     )}
+
                                 </div>
                             </div>
 

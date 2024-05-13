@@ -3,11 +3,9 @@ import { db } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function Reporte(req: NextApiRequest, res: NextApiResponse){
-    if(req.method==='POST'){
-        return await postCalificacion(req,res)
-    }
-    else{
-        return res.status(400).json({error: 'El método no existe'})
+    switch(req.method){
+        case "POST":
+            return await postCalificacion(req,res);
     }
 }
 async function postCalificacion(req: NextApiRequest, res: NextApiResponse){
@@ -18,8 +16,8 @@ async function postCalificacion(req: NextApiRequest, res: NextApiResponse){
         VALUES (${id_cliente_reportado}, ${id_asesor_asignado}, ${calificacion});`;
         return res.status(200).json(result);
     } catch (error) {
-        console.error("Error al enviar la encuesta, inténtelo de nuevo más tarde o comníquese con un administrador:", error);
-        return res.status(500).json({ error: "Hubo un problema al procesar la solicitud" });
+        console.error("Error al enviar calificaciones, inténtelo de nuevo más tarde o comníquese con un administrador:", error);
+        return res.status(500).json({ error: "Hubo un problema al procesar la solicitud post" });
     }finally{
         client.release();
     }

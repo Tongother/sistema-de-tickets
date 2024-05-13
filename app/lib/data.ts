@@ -34,3 +34,27 @@ export async function fetchProfile() {
     }
 }
 
+
+export async function fetchPromedios() {
+    try{
+        const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/analytics`);
+        const data = await res.json();
+        console.log(data);
+        return data;
+    } 
+    catch(error){
+        console.log("Error fetching data:", error);
+    }
+}
+
+export async function fetchCalificacionesData(id_asesor_asignado: number) {
+    try{
+        const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/calificaciones/${id_asesor_asignado}`);
+        const data = await res.json();
+
+        return data;
+    } 
+    catch(error){
+        console.log("Error fetching data:", error);
+    }
+}

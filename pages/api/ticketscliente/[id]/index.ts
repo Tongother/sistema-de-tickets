@@ -14,7 +14,6 @@ const getTicket = async (req:NextApiRequest, res:NextApiResponse) =>{
     const client = await db.connect();
     try{
         const {id}  = req.query as any;
-        console.log(id);
         const resultGet = await sql`SELECT * FROM ticket_preview_cliente WHERE id_cliente_reportado = ${id}`;
         return res.status(200).json(resultGet.rows);
     }catch(error){

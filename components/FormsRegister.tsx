@@ -33,7 +33,7 @@ export default function FormsRegister() {
     const [cambiarForm, setCambiarForm] = useState(false);
     const [cambiarSlider, setCambiarSlider] = useState({ bullet1: true, bullet2: false, bullet3: false });
     const [cambiarImagenSlider, setCambiarImagenSlider] = useState({ imagen1: true, imagen2: false, imagen3: false });
-    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [credentials, setCredentials] = useState({ correo: '', password: '' });
     const [loginError, setLoginError] = useState(false);
     const [registerSucces, setRegisterSucces] = useState(false);
     const [registerError, setRegisterError] = useState(false);

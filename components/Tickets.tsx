@@ -1,9 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ticket from "@/pages/api/ticket";
 
 const Tickets = () => {
-    const [data, setData] = useState<{id: number; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: any;}[]>([]);
+    const [data, setData] = useState<{id: number; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number;}[]>([]);
     useEffect (() => {
         const getData = async () => {
             try{
@@ -22,12 +23,13 @@ const Tickets = () => {
         };
         getData();
     }, []);
-
+    
     const HowLong = (diferencia_segundos:any) => {
-        const segundos = diferencia_segundos;
+        const segundos = parseInt(diferencia_segundos, 10);
         const minutos = Math.round(segundos / 60);
         const horas = Math.round(minutos / 60);
         const dias = Math.round(horas / 24);
+    
         if (segundos < 60){
             return segundos + " segundos";
         }
@@ -40,8 +42,8 @@ const Tickets = () => {
         if (horas > 24){
             return dias + " días";
         }
-    }
-    
+    };
+
     return (
         
         <>
