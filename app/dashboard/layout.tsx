@@ -26,7 +26,7 @@ export default function DashboardLayaout({ children }: DashboardLayaoutProps) {
     return(
     <main className='h-screen w-screen flex'>
         <section className="w-[300px] flex items-end justify-end">
-            <Dashboard dashboardInfo={dashboardInfo} title='Cliente'/>
+            <Dashboard dashboardInfo={dashboardInfo} title='Administrador'/>
         </section>
         <section className="w-full flex flex-col">
             <Header headerInfo={headerInfo}> {children} </Header>

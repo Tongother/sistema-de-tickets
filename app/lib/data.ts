@@ -1,4 +1,4 @@
-export async function fetchUsersTable() {
+export async function fetchClientTable() {
 
     try{
 
@@ -7,6 +7,19 @@ export async function fetchUsersTable() {
         return data.clientes;
 
     }catch(error){
+    }
+}
+
+export async function fetchAdvisorTable() {
+
+    try{
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/advisor`, {method: "GET"});
+        const data = await res.json();
+        return data.asesor;
+
+    }catch(error){
+        console.log("Failed to fetch data: ", error);
     }
 }
 

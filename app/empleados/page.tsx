@@ -91,7 +91,7 @@ export default function empleados() {
                      animate={ hidden[3] ? "hidden" : "visible" }>
                         <h1 className="text-white text-4xl m-2 text-center">Luis Solis Pasquett</h1>
                         <div className="max-w-lg">
-                            <p className=" text-white mt-2 text-center">Soy programador</p>
+                            <p className=" text-white mt-2 text-center">Estudiante que siempre busca aprende algo nuevo, me gusta mucho realizar cualquier trabajo de una manera más sencilla y simple con ayuda de la codificación</p>
                         </div>
                     </motion.div>
                     <Image src={Bisquet.src} alt="empleados" fill={true} quality={100} className={`cursor-pointer ${opacityImage[3]} hover:opacity-80"`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>

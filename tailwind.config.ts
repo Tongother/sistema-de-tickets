@@ -21,12 +21,12 @@ const config: Config = {
       keyframes: {
         carrousel: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(calc(-163.4px * 9))" },
+          "100%": { transform: "translateX(calc(-159.6px * 9))" },
         },
       },
       animation: {
         carrousel: "carrousel 25s linear infinite",
-      }
+      },
     },
   },
   plugins: [],

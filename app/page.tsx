@@ -27,6 +27,7 @@ export default function Home() {
 //     console.log(res);
 //     }
 
+
 const [objectFlyout, setObjectFlyout] = useState(true);
 useEffect(() => {
   const handleOut = () => {

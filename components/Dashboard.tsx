@@ -37,8 +37,8 @@ export default function Dashboard({dashboardInfo, title}:DashboardProps) {
                 </div>
             </div>
             <section className="h-full w-full text-white font-outfit flex flex-col mt-7">
-                {dashboardInfo.map((info) => (
-                    <Link href={info.redirect}>
+                {dashboardInfo.map((info, index) => (
+                    <Link href={info.redirect} key={index}>
                         <article className="flex items-center mt-3 w-[275px] p-[15px] pl-[20px] cursor-pointer border-none rounded-r-[12px] text-slate-500  hover:bg-[#1F283D] hover:text-white">
                             <h1 className="ml-2 text-[15px] font-outfit font-bold">{info.name}</h1>
                         </article>

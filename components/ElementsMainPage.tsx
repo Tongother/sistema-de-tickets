@@ -112,7 +112,8 @@ export default function ElementsMainPage() {
           initial="rest" animate="visible" whileHover="hover">
             <Image src={info.src} alt="Logo" fill={true} quality={100} onMouseOver={()=>handleLampOn(i)} 
             onMouseOut={()=>{setLamp([lampOFF, lampOFF, lampOFF]); 
-            setTextPhoto(["opacity-60", "opacity-60", "opacity-60"])}} 
+            setTextPhoto(["opacity-40", "opacity-40", "opacity-40"]);
+            setOpacityImage(["opacity-40", "opacity-40", "opacity-40"]);}} 
             className={`${info.iluminacion} hover:opacity-100 cursor-pointer`} style={{maskImage: "linear-gradient(black 80%, transparent)"}}/>
             <div className="w-full h-0 absolute">
               <div className="absolute left-1/2 -translate-x-1/2">

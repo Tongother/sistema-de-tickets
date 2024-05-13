@@ -47,8 +47,8 @@ const Tickets = () => {
         <>
         {data && data.length > 0 && (
             <div className="grid grid-cols-4 grid-rows-3 mt-10 max-h-[2em]">
-                {data.map((tickets) => (
-                    <Link href={`/advisor/resolution/${tickets.id}`}>
+                {data.map((tickets, index) => (
+                    <Link href={`/advisor/resolution/${tickets.id}`} key={index}>
                         <div className="flex flex-wrap justify-center">
                             <div className="bg-gray-200 p-4 m-4 rounded-lg w-64">
                                 <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
