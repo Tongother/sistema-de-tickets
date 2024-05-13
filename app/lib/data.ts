@@ -52,7 +52,6 @@ export async function fetchPromedios() {
     try{
         const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/analytics`);
         const data = await res.json();
-        console.log(data);
         return data;
     } 
     catch(error){
@@ -60,9 +59,9 @@ export async function fetchPromedios() {
     }
 }
 
-export async function fetchCalificacionesData(id_asesor_asignado: number) {
+export async function fetchCalificacionesData() {
     try{
-        const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/calificaciones/${id_asesor_asignado}`);
+        const res = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/calificion`);
         const data = await res.json();
 
         return data;

@@ -14,8 +14,7 @@ export default async function (req: NextApiRequest, res:NextApiResponse){
 const getCalificaciones = async (req: NextApiRequest, res: NextApiResponse) =>{
     const client = await db.connect();
     try{
-        const {id}  = req.query as any;
-        const resultGet = await sql`SELECT * FROM calificaciones WHERE id_asesor_asignado = ${id}`;
+        const resultGet = await sql`SELECT * FROM calificaciones`;
         const result = resultGet.rows;
         return res.status(200).json(result);
     }catch(error){
