@@ -151,7 +151,7 @@ export default function Blog(){
                     Los estudios sociológicos, etnográficos y axiológicos son herramientas fundamentales para comprender las dinámicas culturales, sociales y de valores dentro de una organización. En WindCode, hemos aplicado estos estudios para mejorar la cultura organizacional, promover la diversidad e inclusión, diseñar una estructura organizacional eficiente, fortalecer las relaciones laborales y fomentar la responsabilidad social empresarial.
                     Nuestro equipo de trabajo ha realizado un análisis profundo y ha colocado sus conclusiones en el siguiente archivo. ¡Animate a conocer más acerca de la perspectiva de nuestro personal!
                 </p>
-                <FlyoutLink href="conclusiones.pdf" FlyoutColor="bg-black" FlyoutColorText="hover:text-violet-600"><p className="font-semibold mt-4 text-xl">Normas y politicas WindCode.pdf</p></FlyoutLink>
+                <FlyoutLink href="conclusiones.pdf" FlyoutColor="bg-black" FlyoutColorText="hover:text-violet-600"><p className="font-semibold mt-4 text-xl">Conclusiones.pdf</p></FlyoutLink>
                 <h2 className="mt-12 text-3xl font-semibold underline underline-offset-8" id="bibliografia">
                     Referencias bibliográficas
                 </h2>

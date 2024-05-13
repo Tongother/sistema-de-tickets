@@ -21,7 +21,7 @@ import MicroChip from "@/public/MicroChipLogo.png";
 import mesaReuion from "@/public/mesaReunion.jpg";
 import alianza from "@/public/Alianza.jpg";
 import manpowerLogo from "@/public/Logo_Manpower.png";
-import azureLogo from "@/public/azure.png";
+import possgresVercelLogo from "@/public/possgres_Vercel.png";
 import corporativoJuridico from "@/public/corporativoChiapas.jpg";
 
 export default function compania(){
@@ -113,7 +113,7 @@ export default function compania(){
                     <h1 className=" text-3xl mb-4">Proveedores oficiales</h1>
                     <div className="relative h-[18vh] flex gap-[13%] animate-carrousel" style={{ animationPlayState: pausarCarrousel ? "paused" : ""}}>
 
-                        <motion.div variants={logosFrame} whileHover={"hover"} className="h-full ml-[20%] flex items-center justify-center">
+                        <motion.div variants={logosFrame} whileHover={"hover"} className="h-full ml-[10%] flex items-center justify-center">
                             <Image src={microsoftLogo.src} alt="Microsoft logo" width={100} height={100} className="min-w-[8em] opacity-60 hover:opacity-100" onMouseEnter={() => setPausarCarousel(true)} onMouseLeave={() => setPausarCarousel(false)}/>
                         </motion.div>
 
@@ -129,7 +129,7 @@ export default function compania(){
                             <Image src={MicroChip.src} alt="Microchip logo" width={350} height={100} className="opacity-60 hover:opacity-100" onMouseEnter={() => setPausarCarousel(true)} onMouseLeave={() => setPausarCarousel(false)}/>
                         </motion.div>
                         
-                        <motion.div variants={logosFrame} whileHover={"hover"} className="min-w-[8em] h-full flex items-center justify-center">
+                        <motion.div variants={logosFrame} whileHover={"hover"} className="h-full flex items-center justify-center">
                             <Image src={microsoftLogo.src} alt="Microsoft logo" width={100} height={100} className="min-w-[8em] opacity-60 hover:opacity-100" onMouseEnter={() => setPausarCarousel(true)} onMouseLeave={() => setPausarCarousel(false)}/>
                         </motion.div>
 
@@ -249,7 +249,7 @@ export default function compania(){
                             <h2 className="text-2xl">Empresas con las que trabajamos el outsourcing:</h2>
                             <div className="w-full flex justify-center mt-6">
                                 <Image src={manpowerLogo.src} alt="Microchip logo" width={200} height={100}/>
-                                <Image src={azureLogo.src} alt="Microchip logo" width={110} height={100} className="mr-28 ml-16"/>
+                                <Image src={possgresVercelLogo.src} alt="Microchip logo" width={110} height={100} className="mr-28 ml-16"/>
                                 <Image src={corporativoJuridico.src} alt="Microchip logo" width={125} height={80}/>
                             </div>
                         </div>
