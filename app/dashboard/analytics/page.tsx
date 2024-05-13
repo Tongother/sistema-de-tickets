@@ -24,6 +24,10 @@ function Analytics() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        console.log(calificacionesArray);
+    }, [calificacionesArray]);
+
     const obtenerCalificaciones = async (id: number) => {
         const calificacionesData = await fetchCalificacionesData(id);
         setDataCalificaciones(calificacionesData);
@@ -37,8 +41,10 @@ function Analytics() {
 
             const context = chartRef.current.getContext("2d");
             if (context) {
+
                 const calificaciones = dataCalificaciones.map(item => item.calificacion);
                 setCalificacionesArray(calificaciones);
+
                 console.log(calificacionesArray)
                 const labels = dataCalificaciones.map(calificacion => calificacion.id_calificacion.toString());
                 const data = dataCalificaciones.map(calificacion => calificacion.calificacion);

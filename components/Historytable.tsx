@@ -8,11 +8,12 @@ const HistoryTable = async () => {
     useEffect(() => {
         const fetchData = async () => {
             const historyData = await fetchHistoryTable();
-            setDataHistory(historyData);
+            setDataHistory(historyData.clientes);
         };
 
         fetchData();
     }, []);
+
     return (
         <>
             {dataHistory && (
