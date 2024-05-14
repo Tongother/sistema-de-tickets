@@ -8,4 +8,4 @@ export default function attention_status() {
             <Tickets />
         </div>//
     )
-}
+};

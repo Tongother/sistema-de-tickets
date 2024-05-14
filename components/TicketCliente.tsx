@@ -218,10 +218,10 @@ const TicketCliente = () => {
             )}
 
             {data && data.length >= 0 && (
-                <div className="h-full w-full grid grid-cols-3 grid-rows-[200px] justify-center items-center">
+                <div className="h-full w-full grid grid-cols-3 grid-rows-[200px] justify-center items-center gap-3">
                     {data.map((tickets, index) => (
                         <div key={index} className=" h-full w-full flex items-center justify-center">
-                            <div className="flex flex-wrap justify-center h-[150px] w-[300px] bg-white shadow-md rounded-md font-pop">
+                            <div className="flex flex-wrap justify-center h-[200px] w-[300px] bg-white shadow-md rounded-md font-pop">
                                 <div className="bg-[#3A4268] w-full h-[10%] rounded-t-md"></div>
                                 <div className="w-full h-full p-5 pt-2">
                                     <h3 className="text-md font-semibold">Categoría: {tickets.categoria_problematica}</h3>

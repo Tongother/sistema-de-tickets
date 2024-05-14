@@ -52,7 +52,9 @@ const Tickets = () => {
                         <div key={id_ticket} className=" h-full w-full flex items-center justify-center ">
                             <div>
                                 <Link href={`/advisor/resolution/${tickets.id_ticket}`}>
-                                    <div className="bg-gray-200 p-4 rounded-lg w-64">
+                                    <div className="w-full h-[15px] bg-[#FB561C] rounded-t-lg">
+                                    </div>
+                                    <div className="bg-white p-4 rounded-b-lg w-64 shadow-md">
                                         <h3 className="text-lg font-semibold">Categoría: {tickets.categoria_problematica}</h3>
                                         <p className="text-sm">Estatus: {tickets.estatus}</p>
                                         <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
