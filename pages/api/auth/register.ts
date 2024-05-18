@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 import { sql } from '@vercel/postgres';
 import { db } from '@vercel/postgres';
 

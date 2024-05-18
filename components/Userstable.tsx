@@ -1,5 +1,5 @@
 "use client";
-import { fetchAdvisorTable } from "@/app/lib/data";
+import { fetchAdvisorTable, fetchClientTable } from "@/app/lib/data";
 import { useEffect, useState, useRef } from "react";
 import React from "react";
 import Image from "next/image";
@@ -8,17 +8,16 @@ import settingHover from "@/public/settingHover.gif";
 import axios from "axios";
 
 interface UsersTableProps {
-  data: {dataUsers:any, setDataUsers:any},
   usuario: string,
-  register?: boolean,
-  editAdvisor?: {edit:any, setEdit:any},
+  editAdvisor?: {setEdit:any},
   advisorDelete?: {nombreAsesorAEliminar:any, setNombreAsesorAEliminar:any},
   setIsAreYouSure?: any,
   formRef?: any,
 }
 
-const UsersTable = ({usuario, data, register, editAdvisor, formRef, advisorDelete, setIsAreYouSure}:UsersTableProps) => {
+const UsersTable = ({usuario, editAdvisor, formRef, advisorDelete, setIsAreYouSure}:UsersTableProps) => {
 
+  const [dataUsers, setDataUsers] = useState<any>([]);
   const [imageSetting, setImageSetting] = useState<any>([]);
   const [counter, setCounter] = useState<any>(0);
   //Variables para cambio de imagen y seleccion de usuario
@@ -27,35 +26,47 @@ const UsersTable = ({usuario, data, register, editAdvisor, formRef, advisorDelet
   const [estaAfuera, setEstaAfuera] = useState<any>(false);
   const [matriz, setMatriz] = useState<any>();
   const [matrizBorder, setMatrizBorder] = useState<any>([]);
-  const [onChangeInput, setOnChangeInput] = useState<any>();
-  const [fila, setFila] = useState<any>(0);
+  const [onChangeInput, setOnChangeInput] = useState<{id: number, Nombre: string, Apellido: string, Correo: string, Password: string}>({
+    id: 0,
+    Nombre: "",
+    Apellido: "",
+    Correo: "",
+    Password: ""
+  });
   const refIsSetting = useRef<HTMLDivElement>(null);
 
-  //Variables de referencia para la lógica de edición de datos y eliminación de datos
-
-  const [htmlSettings, setHtmlSettings] = useState<any>();
+  if(usuario == "Asesor"){
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        try{
+          const data = await fetchAdvisorTable();
+          setDataUsers(data);
+        }catch(error){
+          console.error('Error al obtener los datos de la tabla de Asesores:', error);
+        }
+      }
+      fetchData();
+    }, []);
+  }else if(usuario == "Cliente"){
+    useEffect(() => {
+        const fetchData = async () => {
+          try{
+            const data = await fetchClientTable();
+            setDataUsers(data);
+          }catch(error){
+            console.error('Error al obtener los datos de la tabla de Clientes:', error);
+          }
+        }
+        fetchData();
+    }, []);
+  }
 
 useEffect(() => {
-  const newOrderInput = [];
-  const newArrayOrderInput = [];
-    if(data.dataUsers && data.dataUsers.length > 0){
-      setCounter(data.dataUsers.length);
-      for (let i = 0; i < counter; i++) {
-        newArrayOrderInput.length = 0;
-        for (let j = 0; j < 1; j++) {
-          newArrayOrderInput.push(data.dataUsers[j].id_asesor);
-          newArrayOrderInput.push(data.dataUsers[j].nombre);
-          newArrayOrderInput.push(data.dataUsers[j].apellido);
-          newArrayOrderInput.push(data.dataUsers[j].correo);
-          newArrayOrderInput.push(data.dataUsers[j].password);
-        }
-        newOrderInput.push(newArrayOrderInput);
-      }
+    if(dataUsers && dataUsers.length > 0){
+      setCounter(dataUsers.length);
     }
-    if(newOrderInput.length > 0){
-      setOnChangeInput(newOrderInput);
-    }
-}, [data.dataUsers]);
+}, [dataUsers]);
 
 useEffect(() => {
   const newImageSetting = [];
@@ -83,81 +94,21 @@ useEffect(() => {
   if(newOrderBorder.length > 0){
     setMatrizBorder(newOrderBorder);
   }
-}, [counter, ]);
-
-const handleOnChangeInput = (index:number, event:any) => {
-  const newOrder = onChangeInput.map((value:any, i:number)=> {
-    if(i == index){
-      setFila(index);
-      return value.map((value:any, j:number)=> {
-        if(j == parseInt(event.target.id)){
-          return event.target.value;
-        }else{
-          return value;
-        }
-      })
-    }else{
-      return value;
-    }
-  })
-  setOnChangeInput(newOrder);
-}
+}, [counter, dataUsers]);
 
 useEffect(() => {
-  if(matriz && matriz.length > 0 && matriz[0].length > 0 && data.dataUsers && data.dataUsers.length > 0 && matrizBorder && matrizBorder.length > 0 && imageSetting && imageSetting.length > 0 && isSetting && isSetting.length > 0){
-    if(usuario == "Cliente"){
-      setHtmlSettings(
-        data.dataUsers.map((user:any, index:number) => (
-          <tr className="flex justify-around border-b-[1px] py-[15px]" key={index}>
-              <td className={`relative flex justify-center items-center min-w-[2em] rounded-lg`}><input type="text" readOnly={true} value={user.id_cliente} className={`w-[1em] text-center focus:outline-none`}/></td>
-              <td className={`flex justify-center items-center min-w-[5em] max-w-[6em]`}><input type="text" defaultValue={user.nombre} readOnly={matriz[index][1]} className={`w-[5em] text-center focus:outline-none ${matrizBorder[index]}`} required/></td>
-              <td className={`flex justify-center items-center min-w-[7em] max-w-[6em]`}><input type="text" defaultValue={user.apellido} readOnly={matriz[index][2]} className={`w-[7em] text-center focus:outline-none ${matrizBorder[index]}`} required/></td>
-              <td className={`flex justify-center items-center min-w-[15em] max-w-[11em]`}><input type="email" defaultValue={user.correo} readOnly={matriz[index][3]} className={`w-[15em] text-center focus:outline-none ${matrizBorder[index]}`} required/></td>
-              <td className={`flex items-center min-w-[15em] max-w-[11em] overflow-auto`}><input type="password" defaultValue={user.password} readOnly={matriz[index][4]} className={`w-[15em] text-center focus:outline-none ${matrizBorder[index]}`} required minLength={8}/></td>
-          </tr>
-        ))
-      )
-    }else if(usuario == "Asesor"){
-      setHtmlSettings(
-        data.dataUsers.map((user:any, index:number) => (
-          <tr className="flex justify-around border-b-[1px] py-[15px]" key={index}>
-              <td className={`relative flex justify-center items-center min-w-[2em] rounded-lg`}>
-                <input type="text" readOnly={true} value={user.id_asesor} className={`w-[1em] text-center focus:outline-none`}/>
-              </td>
-              <td className={`flex justify-center items-center min-w-[5em] max-w-[6em]`}>
-                <input type="text" defaultValue={user.nombre} readOnly={matriz[index][1]} id={`${1}`} required
-                className={`w-[5em] text-center focus:outline-none ${matrizBorder[index]}`} autoFocus={true}  onChange={(event) => handleOnChangeInput(index, event)}/>
-              </td>
-              <td className={`flex justify-center items-center min-w-[7em] max-w-[6em]`}>
-                <input type="text" defaultValue={user.apellido} readOnly={matriz[index][2]} id={`${2}`} required
-                className={`w-[7em] text-center focus:outline-none ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
-              </td>
-              <td className={`flex justify-center items-center min-w-[15em] max-w-[11em]`}>
-                <input type="email" defaultValue={user.correo} readOnly={matriz[index][3]} id={`${3}`} required
-                className={`w-[15em] text-center focus:outline-none ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
-              </td>
-              <td className={`flex items-center min-w-[15em] max-w-[11em] overflow-auto`}>
-                <input type="password" defaultValue={user.password} readOnly={matriz[index][4]} id={`${4}`} required minLength={8}
-                className={`w-[15em] text-center  ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
-              </td>
-              
-              <td className="relative flex justify-center items-center min-w-[5em] max-w-[6em]">
-                <Image src={imageSetting[index] || setting.src} 
-                onMouseOver={()=> {handleImageHover(index);}} onMouseOut={()=> handleImageStatic(index)} alt="Opciones" onClick={()=>{handleOnClickSettings(index)}}
-                width={25} height={25} className=" cursor-pointer"/>
-                {estaAfuera && isSetting[index] && (
-                  <div className="absolute top-8 right-8 bg-white border border-gray-300 rounded-md shadow-md p-2 z-10" id={`${index}`} ref={refIsSetting}>
-                    <p className="cursor-pointer hover:underline hover:text-cyan-800" onClick={() => handleOnClickEdit(index)}>Editar</p>
-                    <p className="cursor-pointer hover:underline hover:text-red-800" onClick={()=> handleAreYouSure(index)}>Eliminar</p>
-                  </div>
-                )}
-              </td>
-          </tr>
-        ))
-      )
-    }
+  console.log(onChangeInput);
+}, [onChangeInput]);
+
+const handleOnChangeInput = (index:number, event: any) => {
+
+  setOnChangeInput({...onChangeInput, id: parseInt(event.target.id), [event.target.name]: event.target.value});
+  
+  if(event.target.name == "Password" && onChangeInput.Password == ""){
+    event.target.value = "";
+  }
+  // setOnChangeInput(newOrder);
 }
-}, [data.dataUsers, matriz, matrizBorder, imageSetting, isSetting, estaAfuera]);
 
 const handleImageHover = (index:number) =>{
   const newImageSetting = imageSetting.map((value:any, i:number)=>{
@@ -214,26 +165,22 @@ const handleAreYouSure = (index:number) =>{
   })
   setIsSetting(newIsSetting);
   if(advisorDelete?.nombreAsesorAEliminar != undefined){
-    advisorDelete.setNombreAsesorAEliminar({...advisorDelete.nombreAsesorAEliminar, ["nombre"]: data.dataUsers[index].nombre, ["index"]: data.dataUsers[index].id_asesor});
+    advisorDelete.setNombreAsesorAEliminar({...advisorDelete.nombreAsesorAEliminar, ["nombre"]: dataUsers[index].nombre, ["index"]: dataUsers[index].id_asesor});
   }
 }
 
-useEffect(() => {
-  if(register){
-    const fetchData = async () => {
-      try{
-        const data = await fetchAdvisorTable();
-        data.setDataUsers(data);
-      }catch(error){
-        console.error('Error al obtener los datos de la tabla de Asesores:', error);
-      }
-    }
-
-    fetchData();
-  }
-}, [register]);
-
 const handleOnClickEdit = (index:number) =>{
+
+  setOnChangeInput(
+    {
+      id: 0,
+      Nombre: "",
+      Apellido: "",
+      Correo: "",
+      Password: ""
+    }
+  );
+
   const newOrder = matriz.map((value:any, i:number)=>{
     if(i == index){
       return value.map((value:any, j:number)=>{
@@ -272,80 +219,103 @@ useEffect(() => {
   };
 }, []);
 
-useEffect(()=>{
-  
-}, [editAdvisor?.edit])
-
 const handleOnSubmit = async (e:any) =>{
 
 
-  const id = onChangeInput[fila][0];
-  const Nombre = onChangeInput[fila][1];
-  const Apellido = onChangeInput[fila][2];
-  const Correo = onChangeInput[fila][3];
-  const Contraseña = onChangeInput[fila][4];
-  
+  const id = onChangeInput?.id;
+  const Nombre = onChangeInput?.Nombre;
+  const Apellido = onChangeInput?.Apellido;
+  const Correo = onChangeInput?.Correo;
+  const Contraseña = onChangeInput?.Password;
 
-  try{
-    const res = await axios.post('/api/upAdvisor', {
-      id: id,
-      nombre: Nombre,
-      apellido: Apellido,
-      correo: Correo,
-      password: Contraseña
-    });
-    if(res.statusText === "OK"){
-      alert("Asesor actualizado correctamente");
-      window.location.reload();
-    }
-  }catch(error:any){
-    console.error('Error al actualizar los datos del asesor:', error);
-  }
+  console.log(id, Nombre, Apellido, Correo, Contraseña)
 
-  const fetchData = async () => {
     try{
-      const data = await fetchAdvisorTable();
-      data.setDataUsers(data);
-    }catch(error){
-      console.error('Error al obtener los datos de la tabla de Clientes:', error);
+      const res = await axios.post('/api/upAdvisor', {
+        id: id,
+        nombre: Nombre,
+        apellido: Apellido,
+        correo: Correo,
+        password: Contraseña
+      });
+      if(res.statusText === "OK"){
+        alert("Asesor actualizado correctamente");
+        window.location.href = "/dashboard/advisor";
+      }
+    }catch(error:any){
+      console.error('Error al actualizar los datos del asesor:', error);
     }
-  }
-
-  fetchData();
 }
 
   return (
-    <form ref={formRef} action={(e)=>handleOnSubmit(e)}>
-      <div className="relative flex justify-center">
-        {data.dataUsers && data.dataUsers.length > 0 && matriz && matriz[0] && matriz[0].length > 0 && (
-          <table className="w-[95%] table-fixed border-collapse">
-            {data.dataUsers && (
-            <thead className="p-6">
-              <tr className="flex justify-around border rounded-md">
-                <th className="min-w-[2em] text-center my-[15px]">ID</th>
-                <th className="min-w-[5em] max-w-[6em] text-center my-[15px]">Nombre</th>
-                <th className="min-w-[7em] max-w-[8em] text-center my-[15px]">Apellidos</th>
-                <th className="min-w-[15em] max-w-[11em] text-center my-[15px]">Correo</th>
-                <th className="min-w-[15em] max-w-[11em] text-center my-[15px]">Contraseña</th>
-                {usuario == "Asesor" && (<th className="min-w-[5em] max-w-[6em] text-center my-[15px]">Opciones</th>)}
-              </tr>
-            </thead>
-            )}
-            <tbody>
+      <form ref={formRef} action={(e)=>handleOnSubmit(e)}>
+      {dataUsers && (
+        <div className="relative flex justify-center">
+          {dataUsers && dataUsers.length > 0 && matriz && matriz[0] && matriz[0].length > 0 && (
+            <table className="w-[95%] table-fixed border-collapse">
+              {dataUsers && (
+              <thead className="p-6">
+                <tr className="flex justify-around border rounded-md">
+                  <th className="min-w-[2em] text-center my-[15px]">ID</th>
+                  <th className="min-w-[5em] max-w-[6em] text-center my-[15px]">Nombre</th>
+                  <th className="min-w-[7em] max-w-[8em] text-center my-[15px]">Apellidos</th>
+                  <th className="min-w-[15em] max-w-[11em] text-center my-[15px]">Correo</th>
+                  <th className="min-w-[15em] max-w-[11em] text-center my-[15px]">Contraseña</th>
+                  {usuario == "Asesor" && (<th className="min-w-[5em] max-w-[6em] text-center my-[15px]">Opciones</th>)}
+                </tr>
+              </thead>
+              )}
+              <tbody>
 
-              {htmlSettings}
+              {dataUsers.map((user:any, index:number) => (
+            <tr className="flex justify-around border-b-[1px] py-[15px]" key={index}>
+                <td className={`relative flex justify-center items-center min-w-[2em] rounded-lg`}>
+                  <input type="text" readOnly={true} name="id" value={usuario == "Asesor"? user.id_asesor : user.id_cliente} className={`w-[2em] text-center focus:outline-none`}/>
+                </td>
+                <td className={`flex justify-center items-center min-w-[5em] max-w-[6em]`}>
+                  <input type="text" defaultValue={user.nombre} name="Nombre" readOnly={matriz[index][1]} id={`${usuario == "Asesor"? user.id_asesor : user.id_cliente}`} required
+                  className={`w-[5em] text-center focus:outline-none ${matrizBorder[index]}`} autoFocus={true}  onChange={(event) => handleOnChangeInput(index, event)}/>
+                </td>
+                <td className={`flex justify-center items-center min-w-[8em]`}>
+                  <input type="text" defaultValue={user.apellido} name="Apellido" readOnly={matriz[index][2]} id={`${usuario == "Asesor"? user.id_asesor : user.id_cliente}`} required
+                  className={`w-[8em] text-center focus:outline-none ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
+                </td>
+                <td className={`flex justify-center items-center min-w-[15em] max-w-[11em]`}>
+                  <input type="email" defaultValue={user.correo} name="Correo" readOnly={matriz[index][3]} id={`${usuario == "Asesor"? user.id_asesor : user.id_cliente}`} required
+                  className={`w-[15em] text-center focus:outline-none ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
+                </td>
+                <td className={`flex items-center min-w-[15em] max-w-[11em] overflow-auto`}>
+                  <input type="password" defaultValue={user.password} name="Password" readOnly={matriz[index][4]} id={`${usuario == "Asesor"? user.id_asesor : user.id_cliente}`} required minLength={8}
+                  className={`w-[15em] text-center focus:outline-none ${matrizBorder[index]}`} onChange={(event) => handleOnChangeInput(index, event)}/>
+                </td>
+                {usuario == "Asesor" &&
+                <td className="relative flex justify-center items-center min-w-[5em] max-w-[6em]">
+                  <Image src={imageSetting[index] || setting.src} 
+                  onMouseOver={()=> {handleImageHover(index);}} onMouseOut={()=> handleImageStatic(index)} alt="Opciones" onClick={()=>{handleOnClickSettings(index)}}
+                  width={25} height={25} className=" cursor-pointer"/>
+                  {estaAfuera && isSetting[index] && (
+                    <div className="absolute top-8 right-8 bg-white border border-gray-300 rounded-md shadow-md p-2 z-10" id={`${index}`} ref={refIsSetting}>
+                      <p className="cursor-pointer hover:underline hover:text-cyan-800" onClick={() => handleOnClickEdit(index)}>Editar</p>
+                      <p className="cursor-pointer hover:underline hover:text-red-800" onClick={()=> handleAreYouSure(index)}>Eliminar</p>
+                    </div>
+                  )}
+                </td>
+                }
+            </tr>
+          ))}
 
-            </tbody>
-          </table>
-        )}
+              </tbody>
+            </table>
+          )}
 
-        {data.dataUsers && data.dataUsers.length == 0 && (
-          <div className="w-full h-full flex justify-center items-center">
-            <p className="text-center text-gray-400 pb-[8em]">Maybe you need to do more marketing</p>
+          {dataUsers && dataUsers.length == 0 && usuario == "Cliente" && (
+            <div className="w-full h-full flex justify-center items-center">
+              <p className="text-center text-gray-400 pb-[8em]">Tal vez necesitas hacer más marketing</p>
+            </div>
+          )}
           </div>
         )}
-        </div>
-      </form>
+        </form>
   )
 }
 

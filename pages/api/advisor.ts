@@ -41,7 +41,7 @@ export default async function(
 }
 
 export async function getAdvisor() {
-    const asesores = await sql`SELECT * FROM asesores;`;
+    const asesores = await sql`SELECT * FROM asesores ORDER BY id_asesor ASC;`;
     return asesores.rows;
 }
 

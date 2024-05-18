@@ -8,7 +8,6 @@ import axios from "axios";
 
 export default function Advisor() {
 
-  const [dataUsers, setDataUsers] = useState<any>([]);
   const formRefRegister = useRef<HTMLFormElement>(null);
   const [isAddUser, setIsAddUser] = useState(false);
   const [areYouSure, setIsAreYouSure] = useState<any>(false);
@@ -16,29 +15,8 @@ export default function Advisor() {
   const [passwordError, setPasswordError] = useState(false);
   const [formData, setFormData] = useState({nombre: "", apellido: "", email: "", password: "", confirmPassword: ""});
   const [nombreAsesorAEliminar, setNombreAsesorAEliminar] = useState({nombre: "", index: 0});
-  const [registerAdvisor, setRegisterAdvisor] = useState<boolean>(false);
   const [editAdvisor, setEditAdvisor] = useState<boolean>(false);
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-
-    const fetchData = async () => {
-      try{
-        const data = await fetchAdvisorTable();
-        setDataUsers(data);
-      }catch(error){
-        console.error('Error al obtener los datos de la tabla de Asesores:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
-  
-
-
-  const handleHiddenForm = () => {
-    setIsAddUser(!isAddUser);
-  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, inputName: string) => {
     setFormData({...formData, [inputName]: event.target.value});
@@ -78,18 +56,13 @@ export default function Advisor() {
                 const response = await axios.post('/api/registerAdvisor', formData);
                 console.log(response.data);
                 alert('Asesor registrado exitosamente');
-                setRegisterAdvisor(true);
-                setTimeout(() => {
-                  setRegisterAdvisor(false);
-                }, 4000);
-                // Aquí puedes realizar alguna acción adicional después de enviar los datos
+                window.location.href = "/dashboard/advisor";
             } catch (error) {
                 setRegisterError(true);
                 setTimeout(() => {
                     setRegisterError(false);
                 }, 6000);
             } finally {
-                // Reiniciar el formulario si event.currentTarget está definido
                 setFormData({ ...formData, nombre: '', apellido: '', email: '', password: '', confirmPassword: ''})
                 if (formRefRegister.current) {
                     formRefRegister.current.reset();
@@ -98,9 +71,9 @@ export default function Advisor() {
           }
 }
 
-const handleCancelEdit = () => {
+const handleCancelar = () => {
   setEditAdvisor(false);
-  window.location.reload();
+  window.location.href = "/dashboard/advisor";
 }
 
 const handleDeleteUser = async() =>{
@@ -113,7 +86,7 @@ const handleDeleteUser = async() =>{
   if(res.statusText === "OK"){
     alert(res.data.asesor[0].eliminar_asesor);
     setIsAreYouSure(false);
-    window.location.reload();
+    window.location.href = "/dashboard/advisor";
   }
 }
 
@@ -137,13 +110,13 @@ const handleSubmitForm = () => {
                 <div className="relative">
                   <div className="w-full h-[4em] flex items-center justify-center mt-2">
                     <div className="w-[80%] h-full flex items-center justify-end">
-                      <button className="bg-[#0E182C] hover:bg-[#1c2e4e] text-white font-bold py-2 px-4 rounded" onClick={handleHiddenForm}>Agregar asesor</button>
+                      <button className="bg-[#0E182C] hover:bg-[#1c2e4e] text-white font-bold py-2 px-4 rounded" onClick={()=> {setIsAddUser(!isAddUser);}}>Agregar asesor</button>
                     </div>
                   </div>
 
                   {editAdvisor && (
                     <div className="absolute top-1/2 -translate-y-1/2 flex ml-8">
-                      <button className="bg-[#0E182C] hover:bg-[#1c2e4e] text-white font-bold py-2 px-4 rounded" onClick={handleCancelEdit}>Cancelar</button>
+                      <button className="bg-[#0E182C] hover:bg-[#1c2e4e] text-white font-bold py-2 px-4 rounded" onClick={handleCancelar}>Cancelar</button>
                       <input type="submit" className="bg-[#0E182C] hover:bg-[#1c2e4e] text-white font-bold py-2 px-4 rounded ml-8 cursor-pointer" value="Editar asesor" onClick={handleSubmitForm}/>
                     </div>
                   )}
@@ -201,8 +174,7 @@ const handleSubmitForm = () => {
                       delay: 0,
                   }}
             className="h-[50vh] w-full overflow-auto">
-                <UsersTable usuario="Asesor" data={{dataUsers: dataUsers, setDataUsers: setDataUsers}} register={registerAdvisor}
-                editAdvisor={{edit: editAdvisor, setEdit: setEditAdvisor}} formRef={formRef}
+                <UsersTable usuario="Asesor" editAdvisor={{setEdit: setEditAdvisor}} formRef={formRef}
                 advisorDelete={{nombreAsesorAEliminar: nombreAsesorAEliminar, setNombreAsesorAEliminar: setNombreAsesorAEliminar}}
                 setIsAreYouSure={setIsAreYouSure}/>
             </motion.div>
