@@ -38,6 +38,7 @@ const UsersTable = ({usuario, editAdvisor, formRef, advisorDelete, setIsAreYouSu
   if(usuario == "Asesor"){
     
     useEffect(() => {
+      setTimeout(() => {
       const fetchData = async () => {
         try{
           const data = await fetchAdvisorTable();
@@ -47,6 +48,7 @@ const UsersTable = ({usuario, editAdvisor, formRef, advisorDelete, setIsAreYouSu
         }
       }
       fetchData();
+      }, 1500);
     }, []);
   }else if(usuario == "Cliente"){
     useEffect(() => {
