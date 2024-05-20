@@ -8,7 +8,7 @@ import EstrellaAmarillaAnimada from '@/public/estrella_animada.gif'
 import axios from "axios";
 
 const TicketCliente = () => {
-    const [data, setData] = useState<{ id_ticket: number; id_cliente_reportado: number; id_asesor_asignado: number; nombre_asesor: any; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number; calificado: boolean;}[]>([]);
+    const [data, setData] = useState<{ id_ticket: number; id_cliente_reportado: number; id_asesor_asignado: number; nombre_asesor: any; categoria_problematica: string; estatus: string; fecha_reporte: string; diferencia_segundos: number; calificado: boolean; }[]>([]);
     const [userData, setUserData] = useState({ id: 0, nombre: '', apellido: '', email: '', tipoUsuario: '', });
     const [calificarActivo, setCalificarActivo] = useState(false);
     const rate1Ref = useRef<HTMLInputElement>(null);
@@ -20,8 +20,8 @@ const TicketCliente = () => {
     const [animacionEstrella, setAnimacionEstrella] = useState(false);
     const [calificacion, setCalificacion] = useState(0);
     const [encuestasRealizadas, setEncuestasRealizadas] = useState<{ [key: number]: boolean }>({});
-    const [idAsesorAsignado, setIdAsesorAsignado] = useState({id_asesor_asignado: 0});
-    const [idTicket, setIdTicket] = useState({id_ticket: 0});
+    const [idAsesorAsignado, setIdAsesorAsignado] = useState({ id_asesor_asignado: 0 });
+    const [idTicket, setIdTicket] = useState({ id_ticket: 0 });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,9 +60,9 @@ const TicketCliente = () => {
     }, [userData]); // Ejecutar cada vez que userData.id sea diferente de 0
 
 
-    const establecerDatos = (id_ticket: any, id_asesor_Asignado:any) =>{
+    const establecerDatos = (id_ticket: any, id_asesor_Asignado: any) => {
         setIdAsesorAsignado(id_asesor_Asignado);
-        setIdTicket({id_ticket: id_ticket});
+        setIdTicket({ id_ticket: id_ticket });
     };
     const handleStarClick = (ref: React.RefObject<HTMLInputElement>) => {
         setAnimacionEstrella(true);
@@ -128,14 +128,14 @@ const TicketCliente = () => {
     };
 
     const enviarEncuesta = async () => {
-        try{
-            const encuestaData = {id_cliente_reportado: userData.id, id_asesor_asignado: idAsesorAsignado, calificacion: calificacion};
+        try {
+            const encuestaData = { id_cliente_reportado: userData.id, id_asesor_asignado: idAsesorAsignado, calificacion: calificacion };
             const response = await axios.post('/api/calificaciones', encuestaData);
         }
-        catch{
-            console.log({error: 'error al enviar la encuesta'});
+        catch {
+            console.log({ error: 'error al enviar la encuesta' });
         }
-        finally{
+        finally {
             setCalificarActivo(!calificarActivo);
         }
     };
@@ -148,15 +148,15 @@ const TicketCliente = () => {
     };
 
     const postCalificacion = async () => {
-        try{
+        try {
             const query = await axios.post('/api/encuesta', idTicket);
-        }catch(error: any){
-            console.log({error: 'No sirve ptm' });
+        } catch (error: any) {
+            console.log({ error: 'No sirve ptm' });
         }
-        
+
         window.location.href = '/cliente/atencion';
     };
-    
+
 
     const HowLong = (diferencia_segundos: any) => {
         const segundos = diferencia_segundos;
@@ -186,32 +186,32 @@ const TicketCliente = () => {
                         <div className="flex items-center justify-center">
 
                             <input ref={rate1Ref} className="hidden" type="radio" name="rate" id="rate-1" />
-                            <label htmlFor="rate-1" onClick={() => {handleStarClick(rate1Ref); establecerCalificacion(1)}} onMouseOver={() => starMouseOver('star1')} onMouseOut={starMouseOut}>
+                            <label htmlFor="rate-1" onClick={() => { handleStarClick(rate1Ref); establecerCalificacion(1) }} onMouseOver={() => starMouseOver('star1')} onMouseOut={starMouseOut}>
                                 <Image src={cambiarEstrella.star1} alt="Estrella gris" width={30} height={30} />
                             </label>
 
                             <input ref={rate2Ref} className="hidden" type="radio" name="rate" id="rate-2" />
-                            <label htmlFor="rate-2" onClick={() => {handleStarClick(rate2Ref); establecerCalificacion(2)}} onMouseOver={() => starMouseOver('star2')} onMouseOut={starMouseOut}>
+                            <label htmlFor="rate-2" onClick={() => { handleStarClick(rate2Ref); establecerCalificacion(2) }} onMouseOver={() => starMouseOver('star2')} onMouseOut={starMouseOut}>
                                 <Image src={cambiarEstrella.star2} alt="Estrella gris" width={30} height={30} />
                             </label>
 
                             <input ref={rate3Ref} className="hidden" type="radio" name="rate" id="rate-3" />
-                            <label htmlFor="rate-3" onClick={() => {handleStarClick(rate3Ref); establecerCalificacion(3)}} onMouseOver={() => starMouseOver('star3')} onMouseOut={starMouseOut}>
+                            <label htmlFor="rate-3" onClick={() => { handleStarClick(rate3Ref); establecerCalificacion(3) }} onMouseOver={() => starMouseOver('star3')} onMouseOut={starMouseOut}>
                                 <Image src={cambiarEstrella.star3} alt="Estrella gris" width={30} height={30} />
                             </label>
 
                             <input ref={rate4Ref} className="hidden" type="radio" name="rate" id="rate-4" />
-                            <label htmlFor="rate-4" onClick={() => {handleStarClick(rate4Ref); establecerCalificacion(4)}} onMouseOver={() => starMouseOver('star4')} onMouseOut={starMouseOut}>
+                            <label htmlFor="rate-4" onClick={() => { handleStarClick(rate4Ref); establecerCalificacion(4) }} onMouseOver={() => starMouseOver('star4')} onMouseOut={starMouseOut}>
                                 <Image src={cambiarEstrella.star4} alt="Estrella gris" width={30} height={30} />
                             </label>
 
                             <input ref={rate5Ref} className="hidden" type="radio" name="rate" id="rate-5" />
-                            <label htmlFor="rate-5" onClick={() => {handleStarClick(rate5Ref); establecerCalificacion(5)}} onMouseOver={() => starMouseOver('star5')} onMouseOut={starMouseOut}>
+                            <label htmlFor="rate-5" onClick={() => { handleStarClick(rate5Ref); establecerCalificacion(5) }} onMouseOver={() => starMouseOver('star5')} onMouseOut={starMouseOut}>
                                 <Image src={cambiarEstrella.star5} alt="Estrella gris" width={30} height={30} />
                             </label>
                         </div>
                         <p className="text-sm mt-5">¡Tu opinión es importante para nosotros!</p>
-                        <button onClick={() => {enviarEncuesta(); handleEncuestaRealizada(idTicket.id_ticket); postCalificacion()}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-2">Enviar encuesta</button>
+                        <button onClick={() => { enviarEncuesta(); handleEncuestaRealizada(idTicket.id_ticket); postCalificacion() }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 m-2">Enviar encuesta</button>
                         <button onClick={() => setCalificarActivo(false)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Cerrar</button>
                     </div>
                 </div>
@@ -221,7 +221,7 @@ const TicketCliente = () => {
                 <div className="h-full w-full grid grid-cols-3 grid-rows-[200px] justify-center items-center">
                     {data.map((tickets, index) => (
                         <div key={index} className=" h-full w-full flex items-center justify-center">
-                            <div className="flex flex-wrap justify-center h-[150px] w-[300px] bg-white shadow-md rounded-md font-pop">
+                            <div className="mt-[10px] flex flex-wrap justify-center h-[180px] w-[300px] bg-white shadow-md rounded-md font-pop">
                                 <div className="bg-[#3A4268] w-full h-[10%] rounded-t-md"></div>
                                 <div className="w-full h-full p-5 pt-2">
                                     <h3 className="text-md font-semibold">Categoría: {tickets.categoria_problematica}</h3>
@@ -230,15 +230,21 @@ const TicketCliente = () => {
                                         <p className="text-sm">Asesor asignado: {tickets.nombre_asesor}</p>
                                     )}
                                     <p className="text-sm">Reportado hace: {HowLong(tickets.diferencia_segundos)}</p>
-                                    {tickets.estatus === 'Solucionado' && encuestasRealizadas[index] !== true && tickets.calificado !== true &&(
-                                        <button name={`encuesta${index}`} className=" text-[12px] bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-2" onClick={() => {calificarHandleChange(); establecerDatos(tickets.id_ticket, tickets.id_asesor_asignado)}}>
-                                            Califíca la atención recibida
-                                        </button>
-                                    )}
+                                    <div className="flex justify-center">
+                                        {tickets.estatus === 'Solucionado' && encuestasRealizadas[index] !== true && tickets.calificado !== true && (
+                                            <button
+                                                name={`encuesta${index}`}
+                                                className="flex text-[12px] bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-2"
+                                                onClick={() => { calificarHandleChange(); establecerDatos(tickets.id_ticket, tickets.id_asesor_asignado) }}
+                                            >
+                                                Califíca la atención recibida
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-    
+
                     ))}
                 </div>
             )}

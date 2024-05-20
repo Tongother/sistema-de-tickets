@@ -41,7 +41,7 @@ export default function DashboardLayaout({ children }: DashboardLayaoutProps) {
         { name: 'Clientes', src: objetivo.src, redirect: "/dashboard" },
         { name: 'Asesór técnico', src: operador.src, redirect: "/dashboard/advisor" },
         { name: 'Estatus de atención', src: lista.src, redirect: "/dashboard/attention_status" },
-        { name: 'Reportes', src: lista.src, redirect: "/dashboard/analytics" }
+        { name: 'Informes estadísticos', src: lista.src, redirect: "/dashboard/analytics" }
     ];
     const dashboardUser = { name: (userData.nombre + " " + userData.apellido) , email: userData.email, rol: userData.tipoUsuario, src: avatar.src, };
 
