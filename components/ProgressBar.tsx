@@ -31,6 +31,7 @@ export default function ProgressBar({id_ticket, id_cliente_reportado, categoria_
     const [estatusSeleccionado, setEstatusSeleccionado] = useState({estatus: 'Pendiente'});
     const [dataResolucion, setDataResolucion] = useState({id_asesor_asignado: 0, id_ticket: 0, estatus: ''});
     const [userData, setUserData] = useState({ id: 0, nombre: '', apellido: '', email: '', tipoUsuario: '', });
+    const [activarMetodo, setActivarMetodo] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -108,11 +109,30 @@ export default function ProgressBar({id_ticket, id_cliente_reportado, categoria_
         setEstatusSeleccionado({estatus: 'Solucionado'});
     };
 
-    const estatusHandleSubmit = async () => {
-        setDataResolucion({...dataResolucion, id_asesor_asignado: userData.id, id_ticket: id_ticket, estatus: estatusSeleccionado.estatus });
-        const response = await axios.post('/api/resolucion', dataResolucion);
-        window.location.href = '/advisor'
-    };
+    useEffect(()=>{
+        if(activarMetodo === true && estatusSeleccionado.estatus){
+            const estatusHandleSubmit = async () => {
+                setDataResolucion({...dataResolucion, id_asesor_asignado: userData.id, id_ticket: id_ticket, estatus: estatusSeleccionado.estatus });
+            };
+            estatusHandleSubmit();
+        }
+    }, [estatusSeleccionado && activarMetodo ] )
+
+    useEffect(()=>{
+        
+        console.log(dataResolucion)
+        if(dataResolucion.estatus != ""){
+            console.log(dataResolucion)
+            const ActivarElemento = async() =>{
+                const response = await axios.post('/api/resolucion', dataResolucion);
+                if(response.status == 200){
+                    const {} = dataResolucion;
+                    window.location.href = `/advisor/?parametro1=${dataResolucion}`
+                }
+            }
+            ActivarElemento();
+        }
+    }, [dataResolucion])
 
     return(
         <div className="main">
@@ -162,7 +182,7 @@ export default function ProgressBar({id_ticket, id_cliente_reportado, categoria_
                     <p className="text">Solucionado</p>
                 </li>
             </ul>
-            <button className='w-[200px] h-[50px] border-none shadow-sm bg-slate-200 mt-7 rounded-xl hover:shadow-xl text-[#7478B6] font-pop font-semibold' onClick={estatusHandleSubmit}>Finalizar</button>
+            <button className='w-[200px] h-[50px] border-none shadow-sm bg-slate-200 mt-7 rounded-xl hover:shadow-xl text-[#7478B6] font-pop font-semibold' onClick={()=> setActivarMetodo(true)}>Finalizar</button>
         
             <div className="w-full max-w-md mx-auto shadow-md rounded-lg overflow-hidden mb-4 mt-[40px] bg-slate-100">
             <div className="p-4">

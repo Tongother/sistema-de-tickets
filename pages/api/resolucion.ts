@@ -12,16 +12,14 @@ export default async function Resolucion(req: NextApiRequest, res: NextApiRespon
 
 async function postActualizarTicket(req: NextApiRequest, res: NextApiResponse) {
     const {id_asesor_asignado, estatus, id_ticket } = req.body;
+    console.log(id_asesor_asignado, estatus, id_ticket)
     const client = await db.connect();
 
     try {
-        await sql`UPDATE tickets 
-            SET id_asesor_asignado = ${id_asesor_asignado}, 
-            estatus = ${estatus}, 
-            fecha_cierre = CASE WHEN estatus = 'Solucionado' THEN current_timestamp ELSE fecha_cierre END
+        await sql`UPDATE tickets SET
+            estatus = ${estatus}
             WHERE id_ticket = ${id_ticket};
         `;
-
         return res.status(200).json({ message: 'Ticket actualizado correctamente' });
     } catch (error) {
         console.error("Error al actualizar el ticket:", error);

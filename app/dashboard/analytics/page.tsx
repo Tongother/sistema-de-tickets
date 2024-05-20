@@ -59,15 +59,31 @@ function Analytics() {
                         datasets: [{
                             label: 'Calificaciones',
                             data: calificaciones,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)', // Color de fondo de las barras
                             borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
                             borderWidth: 1
                         }]
                     },
                     options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Calificaciones de Asesor'
+                            }
+                        },
                         scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'ID de Calificación'
+                                }
+                            },
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Calificación'
+                                }
                             }
                         }
                     }
