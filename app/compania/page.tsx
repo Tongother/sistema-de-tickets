@@ -225,8 +225,8 @@ export default function compania(){
                             <Image src={expansion.src} alt="Fortaleza" width={70} height={70} className="my-8"/>
                             <h4 className="text-2xl font-medium mb-3">Queremos llegar a más gente</h4>
                             <ul className="w-full list-disc flex flex-col items-center gap-4 mt-2 ml-8 text-lg">
-                                <li>Estamos realizando investigaciones de mercado para identificar oportunidades de expansión en mercados emergentes.</li>
-                                <li>Estaremos haciendo alianzas estratégicas con socios locales o internacionales para facilitar la entrada en nuevos mercados.</li>
+                                <li>Estaremos realizando investigaciones de mercado para identificar oportunidades de expansión en mercados emergentes.</li>
+                                <li>Planeamos hacer alianzas estratégicas con socios locales o nacionales para facilitar la entrada en nuevos mercados.</li>
                                 <li>Mejoraremos constantemente nuestras estrategias de marketing y ventas para llegar a nuevos clientes y aumentar la retención de clientes existentes.</li>
                             </ul>
                         </div>
@@ -239,7 +239,7 @@ export default function compania(){
                             <ul className="w-full list-disc flex flex-col items-center gap-4 mt-2 ml-8 text-lg">
                                 <li>Implementaremos herramientas de gestión de proyectos y sistemas de seguimiento para mejorar la planificación y el control de proyectos.</li>
                                 <li>Promoveremos la automatización de tareas repetitivas y la adopción de herramientas de colaboración en línea para facilitar la comunicación y el trabajo en equipo.</li>
-                                <li>Estableceremos métricas de rendimiento y realizar evaluaciones periódicas para monitorear el progreso</li>
+                                <li>Estableceremos métricas de rendimiento y realizaremos evaluaciones periódicas para monitorear el progreso</li>
                             </ul>
                         </div>
                     </div>
@@ -289,7 +289,7 @@ export default function compania(){
                     <Image src={mesaReuion.src} alt="Mesa con sillas estilo minimalista" fill={true} style={{maskImage: "linear-gradient(black 10%, transparent)"}}/>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-violet-50 flex flex-col items-center w-[50%] rounded-2xl py-12 shadow-lg hover:shadow-2xl">
                         <h2 className="text-3xl font-medium text-center">Modelo de la administración</h2>
-                        <p className="text-lg max-w-[80%] mt-4 text-center">En el competitivo mundo de la tecnología, la capacidad de adaptarse y mejorar constantemente es esencial para mantenerse relevante y competitivo en el mercado. En este sentido, la implementación de prácticas como el benchmarking y el outsourcing se convierten en herramientas clave para impulsar la eficiencia operativa y fomentar la innovación en WindCode.</p>
+                        <p className="text-lg max-w-[80%] mt-4 text-center">En el competitivo mundo de la tecnología, la capacidad de adaptarse y mejorar constantemente es esencial para mantenerse relevante y competitivo en el mercado. En este sentido, la implementación de prácticas como el outsourcing y el DO se convierten en herramientas clave para impulsar la eficiencia operativa y fomentar la innovación en WindCode.</p>
                     </div>
                 </div>
                 <div className="relative flex items-center w-screen h-[60vh]">
@@ -332,8 +332,7 @@ export default function compania(){
                         <p className="text-lg max-w-[80%] mb-8 text-center">
                         En WindCode, nos comprometemos a liderar con el ejemplo en la industria de la tecnología. Nuestra misión no solo se centra en innovar y desarrollar soluciones de software de vanguardia, sino también en garantizar un ambiente de trabajo ético, seguro y productivo para todos nuestros empleados y colaboradores.
                         Creemos firmemente que el éxito a largo plazo se construye sobre la base de prácticas transparentes y responsables. Por eso, hemos desarrollado un conjunto de normas y políticas diseñadas para guiar nuestras operaciones diarias y las interacciones dentro de nuestra comunidad empresarial. Estas políticas reflejan nuestros valores como empresa y nuestro compromiso con la legalidad, la seguridad, y el respeto mutuo.
-                        <br/><br/>A continuación, podrán encontrar los documentos detallados de nuestras políticas, disponibles para su descarga. Estos documentos abarcan desde nuestra ética de trabajo hasta las medidas de seguridad que implementamos, cubriendo aspectos esenciales como la confidencialidad de datos, la integridad de los sistemas de información, y nuestras expectativas de conducta profesional.
-                        Los invitamos a revisar estos documentos para entender mejor cómo operamos y qué esperamos de nuestros empleados, clientes y socios:
+                        <br/><br/>Los invitamos a revisar estos documentos para entender mejor cómo operamos y qué esperamos de nuestros empleados, clientes y socios:
                         </p>
                         <FlyoutLink href="Normas_Politicas.pdf" FlyoutColor="bg-black" FlyoutColorText="hover:text-violet-600"><p className="font-semibold">Normas y politicas WindCode.pdf</p></FlyoutLink>
                     </div>
