@@ -25,7 +25,12 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/auth/login') ||
     pathname.startsWith('/api/auth/register') ||
     pathname.startsWith('/_next/static') ||
-    pathname.startsWith('/favicon.ico')
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/blog') ||
+    pathname.startsWith('/compania') ||
+    pathname.startsWith('/contacto') ||
+    pathname.startsWith('/empleados') ||
+    pathname.startsWith('/porter')
   ) {
     return NextResponse.next();
   }
