@@ -72,18 +72,38 @@ useEffect(() => {
         <h1 className="mb-[.5em] text-6xl font-bold">{informacionCarrousel.Titulo}</h1>
         
         <p className="text-xl">{informacionCarrousel.texto}</p>
-        {informacionCarrousel.extra && (
-          <ul className="mt-6 list-disc list-inside flex flex-col gap-4">
-            {informacionCarrousel.extra2 && (<h3 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo1}</h3>)}
-            <li className="text-xl">{informacionCarrousel.extra.texto1}</li>
-            {informacionCarrousel.extra2 && (<h3 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo2}</h3>)}
-            <li className="text-xl">{informacionCarrousel.extra.texto2}</li>
-            {informacionCarrousel.extra2 && (<h3 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo3}</h3>)}
-            <li className="text-xl">{informacionCarrousel.extra.texto3}</li>
-            {informacionCarrousel.extra2 && (<h3 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo4}</h3>)}
-            <li className="text-xl">{informacionCarrousel.extra.texto4}</li>
-          </ul>
-        )}
+          {informacionCarrousel.extra && informacionCarrousel.extra2 === undefined && (
+            <ul className="mt-6 list-disc list-inside flex flex-col gap-4">
+              <li className="text-xl">{informacionCarrousel.extra.texto1}</li>
+              <li className="text-xl">{informacionCarrousel.extra.texto2}</li>
+              <li className="text-xl">{informacionCarrousel.extra.texto3}</li>
+              <li className="text-xl">{informacionCarrousel.extra.texto4}</li>
+            </ul>
+          )}
+          {informacionCarrousel.extra && informacionCarrousel.extra2 !== undefined && (
+            <article className="flex flex-col gap-10">
+              <div className="flex gap-10">
+                <div className="w-[60%]">
+                  {informacionCarrousel.extra2 && (<h2 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo1}</h2>)}
+                  <h3 className="text-xl">{informacionCarrousel.extra.texto1}</h3>
+                </div>
+                <div className="w-[60%]">
+                  {informacionCarrousel.extra2 && (<h2 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo2}</h2>)}
+                  <h3 className="text-xl">{informacionCarrousel.extra.texto2}</h3>
+                </div>
+              </div>
+              <div className="flex gap-10">
+                <div className="w-[60%]">
+                  {informacionCarrousel.extra2 && (<h2 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo3}</h2>)}
+                  <h3 className="text-xl">{informacionCarrousel.extra.texto3}</h3>
+                </div>
+                <div className="w-[60%]">
+                  {informacionCarrousel.extra2 && (<h2 className="text-2xl font-semibold">{informacionCarrousel.extra2.titulo4}</h2>)}
+                  <h3 className="text-xl">{informacionCarrousel.extra.texto4}</h3>
+                </div>
+              </div>
+            </article>
+          )}
       </div>
     </article>
   </motion.div>
