@@ -43,11 +43,7 @@ export default function Porter() {
                         <div className="flex items-center">
                             <ul className="flex">
                                 <li className="text-white mx-2"><FlyoutLink href="/blog#sociologico" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">Rivalidad entre competidores</FlyoutLink></li>
-                                <li className="text-white mx-2"><FlyoutLink href="/blog#etnografico" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">¿Qué es un estudio etnográfico?</FlyoutLink></li>
-                                <li className="text-white mx-2"><FlyoutLink href="/blog#axiologicos" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">¿Qué es un estudio axiológicos?</FlyoutLink></li>
                                 <li className="text-white mx-2"><FlyoutLink href="/porter" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">5 fuerzas de Michael Porter</FlyoutLink></li>
-                                <li className="text-white mx-2"><FlyoutLink href="/blog#conclusiones" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">Conclusiones</FlyoutLink></li>
-                                <li className="text-white mx-2"><FlyoutLink href="/blog#bibliografia" FlyoutColor="bg-white" FlyoutColorText="hover:text-violet-400">Bibliografia</FlyoutLink></li>
                             </ul>
                         </div>
                     </div>
