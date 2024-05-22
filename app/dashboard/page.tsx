@@ -31,7 +31,7 @@ export default function dashboard() {
               <SearchBar/>
             </div>
             <div className="h-full mt-10 max-h-[515px] overflow-auto">
-              <UsersTable usuario="Cliente" data={{dataUsers:dataUsers, setDataUsers: setDataUsers}}/>
+              <UsersTable usuario="Cliente"/>
             </div>
         </div>
       </div>

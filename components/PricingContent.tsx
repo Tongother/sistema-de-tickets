@@ -15,6 +15,9 @@ export const PricingContent = () => {
                 <Link href="/empleados" className="block text-lg font-normal hover:underline">
                     Nuestros empleados
                 </Link>
+                <Link href="/porter" className="block text-lg font-normal hover:underline">
+                    5 fuerzas de Michael Porter
+                </Link>
                 <Link href="/blog" className="block text-lg font-normal hover:underline">
                     Nuestro blog
                 </Link>

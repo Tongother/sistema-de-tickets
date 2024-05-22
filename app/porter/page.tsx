@@ -29,7 +29,7 @@ export default function Porter() {
             <Image src={logoWindCode.src} alt="Logo" quality={100} width={120} height={120} className="opacity-80 ml-4" />
         </div>
             </div>
-            <div className="min-h-16">
+            <div className="min-h-16 mt-2">
                 <motion.header className="bg-black w-full h-16 fixed z-10"
                     variants={{
                         visible: { y: 0 },

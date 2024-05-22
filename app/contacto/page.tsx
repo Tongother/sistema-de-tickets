@@ -17,7 +17,7 @@ export default function Contacto() {
                     <h1 className="text-white text-center text-5xl font-bold">Contactanos</h1>
                     <ul className="flex flex-col items-start mt-4">
                         <li className="text-white text-center">Telefono: +52 961 266 8500</li>
-                        <li className="text-white text-center">Correo: info@windcodeinc.com</li>
+                        <li className="text-white text-center">Correo: windcodeinc@gmail.com</li>
                     </ul>
                 </article>
                 <article className="pb-[5%]">

@@ -70,7 +70,7 @@ export default function Footer() {
                 <hr className="mt-2 w-52 h-[1px] bg-gray-200 border-none"/>
                 <div className="mt-2 flex flex-col gap-1">
                     <ul className="flex flex-col gap-1">
-                        <li>Correo electrónico: info@windcodeinc.com</li>
+                        <li>Correo electrónico: windcodeinc@gmail.com</li>
                         <li>Teléfono: +52 961 772 3715</li>
                         <li>Dirección: Blvd. Belisario Domínguez 2001,<br/> Sin Nombre, Tuxtla Gutiérrez, Chis.</li>
                     </ul>
